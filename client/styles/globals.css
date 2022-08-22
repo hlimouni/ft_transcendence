@@ -99,7 +99,6 @@ body {
 
 .card_status {
   font-size: .8em;
-  color: #D7BDCA;
 }
 
 .card_btns {
@@ -108,4 +107,19 @@ body {
   margin: 0;
   background-color: black;
   overflow: hidden;
+}
+
+
+.Online_point {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
+  
+  background-color: #0fcc45;
+  border-radius: 50%;
+  
+  position: relative;
+
+  animation: blink 2s linear infinite;
 }

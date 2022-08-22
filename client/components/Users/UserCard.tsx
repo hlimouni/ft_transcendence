@@ -6,9 +6,10 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { User } from '../../utils/interfaces';
-import { style } from '@mui/system';
+import { flexbox, style } from '@mui/system';
 import IMGBACK from '../../../files/backgroungUsers.jpeg'
 import Image from 'next/image';
+import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
 
 export default function UserCard(props: User) {
     return (
@@ -40,16 +41,32 @@ export default function UserCard(props: User) {
                         <div className="card_header">
                             <img className="card_PImg" src={`${props.image}`} />
                             <div className="card_header-text">
-                                <h3 className="card_title">{props.userName}</h3>            
-                                <span className="card_status">{props.isOnline ? "Online" : "Offline"}</span>
+                                <h3 className="card_title">{props.userName}</h3>
+                                <span className="card_status">
+                                    {props.isOnline ? (!props.isPlaying ?
+                                        <span style={{ color: 'green', fontWeight: 'bold' }}>
+                                            <span className='Online_point'></span>
+                                            Online
+                                        </span> :
+                                        <span style={{ color: 'orange', fontWeight: 'bold' , display:'flex', alignItems: 'center', gap: '5px', justifyContent:'center'  }}>
+                                            <span>
+                                                <VideogameAssetIcon />
+                                            </span>
+                                            playing
+                                        </span>
+                                    ) :
+                                        <span style={{ color: 'red' }}>
+                                            Offline
+                                        </span>}
+                                </span>
                             </div>
                         </div>
-                        <div className="card_btns" style={{display: "flex"}}>
+                        <div className="card_btns" style={{ display: "flex" }}>
                             <Button size="small" color='success' variant="outlined" >Add Friend</Button>
                             <Button size="small" color='error' variant="outlined">Block</Button>
                         </div>
                     </div>
-                </a>      
+                </a>
             </li>
         </ul>
 
