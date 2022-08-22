@@ -35,18 +35,18 @@ export default function UserCard(props: User) {
         <ul className='cards'>
             <li>
                 <a href="" className="card">
-                    <Image src={IMGBACK} className="card__image" />
-                    <div className="card__overlay">
-                        <div className="card__header">
-                            <img className="card__thumb" src={`${props.image}`} />
-                            <div className="card__header-text">
-                                <h3 className="card__title">{props.userName}</h3>            
-                                <span className="card__status">{props.isOnline ? "Online" : "Ofline"}</span>
+                    <Image src={IMGBACK} className="card_image" />
+                    <div className="card_Items">
+                        <div className="card_header">
+                            <img className="card_PImg" src={`${props.image}`} />
+                            <div className="card_header-text">
+                                <h3 className="card_title">{props.userName}</h3>            
+                                <span className="card_status">{props.isOnline ? "Online" : "Offline"}</span>
                             </div>
                         </div>
-                        <div className="card__description" style={{display: "flex"}}>
-                            <Button className='btn_addF' size="small" color='success' variant="outlined" >Add Friend</Button>
-                            <Button className='btn_block' size="small" color='error' variant="outlined">Block</Button>
+                        <div className="card_btns" style={{display: "flex"}}>
+                            <Button size="small" color='success' variant="outlined" >Add Friend</Button>
+                            <Button size="small" color='error' variant="outlined">Block</Button>
                         </div>
                     </div>
                 </a>      
