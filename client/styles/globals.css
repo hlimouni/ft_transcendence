@@ -49,12 +49,12 @@ body {
   text-decoration: none;
 }
 
-.card__image {      
+.card_image {      
   width: 100%;
   height: auto;
 }
 
-.card__overlay {
+.card_Items {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -64,11 +64,11 @@ body {
   transition: .2s ease-in-out;
 }
 
-.card:hover .card__overlay {
+.card:hover .card_Items {
   transform: translateY(0);
 }
 
-.card__header {
+.card_header {
   position: relative;
   display: flex;
   align-items: center;
@@ -79,30 +79,30 @@ body {
   transition: .2s ease-in-out;
 }
 
-.card:hover .card__header {
+.card:hover .card_header {
   transform: translateY(0);
 }
 
-.card__thumb {
+.card_PImg {
   flex-shrink: 0;
   width: 50px;
   height: 50px;      
   border-radius: 50%;      
 }
 
-.card__title {
+.card_title {
   font-size: 1em;
   margin: 0 0 .3em;
-  color: #6A515E;
+  color :rgb(166, 160, 160);
 }
 
 
-.card__status {
+.card_status {
   font-size: .8em;
   color: #D7BDCA;
 }
 
-.card__description {
+.card_btns {
   padding-bottom: 1rem;
   justify-content: space-around;
   margin: 0;
