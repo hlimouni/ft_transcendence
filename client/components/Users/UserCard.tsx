@@ -10,6 +10,8 @@ import { flexbox, style } from '@mui/system';
 import IMGBACK from '../../../files/backgroungUsers.jpeg'
 import Image from 'next/image';
 import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
+import Grid from '@mui/material/Grid';
 
 export default function UserCard(props: User) {
     return (
@@ -32,10 +34,10 @@ export default function UserCard(props: User) {
         //         <Button size="small" color='error' variant="outlined">Block</Button>
         //     </CardActions>
         // </Card>
-
+        
         <ul className='cards'>
             <li>
-                <a href="" className="card">
+                <div className="card">
                     <Image src={IMGBACK} className="card_image" />
                     <div className="card_Items">
                         <div className="card_header">
@@ -48,14 +50,12 @@ export default function UserCard(props: User) {
                                             <span className='Online_point'></span>
                                             Online
                                         </span> :
-                                        <span style={{ color: 'orange', fontWeight: 'bold' , display:'flex', alignItems: 'center', gap: '5px', justifyContent:'center'  }}>
-                                            <span>
-                                                <VideogameAssetIcon />
-                                            </span>
-                                            playing
+                                        <span className='ingame'>
+                                            In Game
                                         </span>
                                     ) :
-                                        <span style={{ color: 'red' }}>
+                                        <span style={{ color: 'white', fontWeight: 'bold', opacity: '0.4' }}>
+                                            <span className='Ofline_point'></span>
                                             Offline
                                         </span>}
                                 </span>
@@ -66,7 +66,7 @@ export default function UserCard(props: User) {
                             <Button size="small" color='error' variant="outlined">Block</Button>
                         </div>
                     </div>
-                </a>
+                </div>
             </li>
         </ul>
 

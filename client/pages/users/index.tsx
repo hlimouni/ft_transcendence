@@ -4,6 +4,7 @@ import Loading from "../../components/Login/Loading"
 import UserCard from "../../components/Users/UserCard"
 import { AppContext } from "../../context/AppContext"
 import { User } from "../../utils/interfaces"
+import { Container } from '@mui/material';
 
 
 const Users = () => {
@@ -38,11 +39,19 @@ const Users = () => {
     }
 
     return (
-        <div className="container" style={{ display: "flex", flexWrap: "wrap" }}>
-            {!state.users ? <Loading /> : state.users.map((user: any) => {
-                return <UserCard key={user.id} {...user} />
-            })}
-        </div>
+        <Container style={{color: 'white', backgroundColor: 'dimgrey', padding: '0px'}}>
+
+                {!state.users ? <Loading /> : 
+                <div>
+                    <h1 style={{backgroundColor: 'darkslategrey', paddingLeft: '10px'}}>Users</h1>
+                    <div className="condiv">
+                        {state.users.map((user: any) => {
+                            return <UserCard key={user.id} {...user} />
+                        })}
+                    </div>
+                </div>
+                }
+        </Container>
     )
 }
 

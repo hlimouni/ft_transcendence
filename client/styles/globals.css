@@ -26,18 +26,23 @@ a {
 }
 
 .Login {
-  background-color: black;
+  background-color: rgb(0, 0, 0);
 }
 
 /* ################################################## users cards ################################################## */
-.cards {
+.condiv{
   display: grid;
-  margin: 20px;
-  padding: 0;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.cards {
+  padding: 0px;
+  display: flex;
+  justify-content: center;
   list-style-type: none;
 }
 body {
-  background-color:dimgrey;
+  background-color:rgb(54, 54, 54);
 }
 .card {
   position: relative;
@@ -93,7 +98,7 @@ body {
 .card_title {
   font-size: 1em;
   margin: 0 0 .3em;
-  color :rgb(166, 160, 160);
+  color :rgb(207, 209, 210);
 }
 
 
@@ -121,5 +126,33 @@ body {
   
   position: relative;
 
-  animation: blink 2s linear infinite;
+}
+
+.Ofline_point {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 5px;
+  
+  background-color: white;
+  border-radius: 50%;
+  
+  position: relative;
+}
+
+.ingame {
+  display: flex;
+  color: orange;
+  font-weight: bold;
+  /* align-items: center; */
+  /* gap: 5px; */
+  /* justify-content: center; */
+  opacity: 0.5;
+  animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+  100% { transform: scale(1, 1); 
+          opacity: 1;
+        }
 }
