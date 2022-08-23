@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as cookieParser from 'cookie-parser';
 import { ConfigService } from '@nestjs/config';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -17,6 +18,15 @@ async function bootstrap() {
 
   app.use(cookieParser());
   app.enableShutdownHooks();
+
+  //Swagger API
+  const config = new DocumentBuilder()
+    .setTitle('ft_transcendence Api')
+    .setDescription('there is no description')
+    .setVersion('1.0')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
 
   await app.listen(ServerPort);
 }

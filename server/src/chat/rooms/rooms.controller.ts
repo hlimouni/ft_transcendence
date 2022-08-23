@@ -3,6 +3,7 @@ import { Controller, Get, Param, UseGuards, Req } from '@nestjs/common';
 import { RoomsService } from './rooms.service';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from '../chat.gateway';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('rooms')
 export class RoomsController {
@@ -11,6 +12,8 @@ export class RoomsController {
     private readonly jwtService: JwtService,
     private readonly usersService: UsersService,
   ) {}
+
+  @ApiTags('Chat')
   @UseGuards(JwtService)
   @Get()
   findAll(@Req() req) {
@@ -22,16 +25,21 @@ export class RoomsController {
     if (jwtPayload.id) return this.roomsService.findAll(jwtPayload.id);
   }
 
+  @ApiTags('Chat')
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.roomsService.findOne(id);
   }
+
+  @ApiTags('Chat')
   @Get(':id/members')
   async findMembers(@Param('id') id: string) {
     const room = await this.roomsService.findOne(id);
 
     return await this.getUsersData(room[0].ActiveUsers);
   }
+
+  @ApiTags('Chat')
   @Get(':id/admins')
   async findAdmins(@Param('id') id: string) {
     const room = await this.roomsService.findOne(id);
@@ -42,6 +50,8 @@ export class RoomsController {
       );
     else return [];
   }
+
+  @ApiTags('Chat')
   @Get(':id/banned')
   async findBanned(@Param('id') id: string) {
     const room = await this.roomsService.findOne(id);
@@ -50,6 +60,8 @@ export class RoomsController {
       return await this.getUsersData(room[0].bannedUser);
     else return [];
   }
+
+  @ApiTags('Chat')
   @Get(':id/muted')
   async findMuted(@Param('id') id: string) {
     const room = await this.roomsService.findOne(id);
