@@ -1,12 +1,16 @@
 import React, { useEffect } from "react"
+import { Container } from '@mui/material';
 
 const Login = () => {
     return (
-        <div className="Login">
-            <form action={`${process.env.SERVER_HOST}/auth/42`}>
-                <button type="submit">Login</button>
-            </form>
-        </div>
+        <Container maxWidth="sm">
+            <div className="Login">
+                <form action={`${process.env.SERVER_HOST}/auth/42`}>
+                    <button type="submit">Login</button>
+                </form>
+            </div>
+        </Container>
+
     )
 }
 
