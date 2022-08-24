@@ -14,7 +14,9 @@ import { CreateMessageDto } from './dto/create-message.dto';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from '../chat.gateway';
 import { Request } from 'express';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Chat')
 @Controller('messages')
 export class MessagesController {
   constructor(
