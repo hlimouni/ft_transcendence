@@ -38,7 +38,7 @@ export default function UserCard(props: User) {
         <ul className='cards'>
             <li>
                 <div className="card">
-                    <Image src={IMGBACK} className="card_image" />
+                    <Image draggable="false" src={IMGBACK} className="card_image" />
                     <div className="card_Items">
                         <div className="card_header">
                             <img className="card_PImg" src={`${props.image}`} />
