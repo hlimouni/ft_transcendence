@@ -43,7 +43,7 @@ const Users = () => {
 
                 {!state.users ? <Loading /> : 
                 <div>
-                    <h1 style={{backgroundColor: 'darkslategrey', paddingLeft: '10px'}}>Users</h1>
+                    <h1 style={{backgroundColor: 'darkslategrey', paddingLeft: '10px', textDecoration:'underline'}}>Users</h1>
                     <div className="condiv">
                         {state.users.map((user: any) => {
                             return <UserCard key={user.id} {...user} />
