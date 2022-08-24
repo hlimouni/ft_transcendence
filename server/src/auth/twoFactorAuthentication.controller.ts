@@ -14,7 +14,9 @@ import { TwoFactorAuthenticationService } from './twoFactorAuthentication.servic
 import { Response } from 'express';
 import { UsersService } from 'src/users/users.service';
 import { JwtAuthService } from './jwt-auth.service';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Authentication')
 @Controller('2fa')
 export class TwoFactorAuthenticationController {
   constructor(

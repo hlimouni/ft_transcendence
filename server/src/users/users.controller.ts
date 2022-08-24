@@ -20,8 +20,10 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import JwtTwoFactorGuard from 'src/auth/jwt-2fa-auth.guard';
 import { saveImageToStorage } from './helpers/image-storage';
 import { BlockGuard } from './block.guard';
-import User from './entities/user.entity';
+import { RelatedUserDto } from './dtos/related-user.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Users')
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
@@ -38,11 +40,11 @@ export class UsersController {
     return { ...req.user };
   }
 
-  @Post('create')
-  @UseGuards(JwtTwoFactorGuard)
-  async createUser(@Body() createUserDto: any) {
-    return await this.usersService.createUser(createUserDto);
-  }
+  // @Post('create')
+  // @UseGuards(JwtTwoFactorGuard)
+  // async createUser(@Body() createUserDto: any) {
+  //   return await this.usersService.createUser(createUserDto);
+  // }
 
   @Get('id/:id')
   @UseGuards(BlockGuard)
@@ -57,76 +59,70 @@ export class UsersController {
   @UseGuards(JwtTwoFactorGuard)
   async sendRequest(
     @Req() req: RequestWithUser,
-    @Body() body: { relatedUserId: string },
+    @Body() relatedUser: RelatedUserDto,
   ) {
-    if (req.user.id === body.relatedUserId)
+    if (req.user.id === relatedUser.id)
       throw new HttpException(
         'Forbidden, Can not send request',
         HttpStatus.FORBIDDEN,
       );
-    return await this.usersService.sendRequest(req.user.id, body.relatedUserId);
+    return await this.usersService.sendRequest(req.user.id, relatedUser.id);
   }
 
   @Post('accept')
   @UseGuards(JwtTwoFactorGuard)
   async acceptRequest(
     @Req() req: RequestWithUser,
-    @Body() body: { relatedUserId: string },
+    @Body() relatedUser: RelatedUserDto,
   ) {
-    if (req.user.id === body.relatedUserId)
+    if (req.user.id === relatedUser.id)
       throw new HttpException(
         'Forbidden, Can not send request',
         HttpStatus.FORBIDDEN,
       );
-    return await this.usersService.acceptRequest(
-      req.user.id,
-      body.relatedUserId,
-    );
+    return await this.usersService.acceptRequest(req.user.id, relatedUser.id);
   }
 
   @Post('unfriend')
   @UseGuards(JwtTwoFactorGuard)
   async unfriend(
     @Req() req: RequestWithUser,
-    @Body() body: { relatedUserId: string },
+    @Body() relatedUser: RelatedUserDto,
   ) {
-    if (req.user.id === body.relatedUserId)
+    if (req.user.id === relatedUser.id)
       throw new HttpException(
         'Forbidden, Can not send request',
         HttpStatus.FORBIDDEN,
       );
-    return await this.usersService.removeRelation(
-      req.user.id,
-      body.relatedUserId,
-    );
+    return await this.usersService.removeRelation(req.user.id, relatedUser.id);
   }
 
   @Post('block')
   @UseGuards(JwtTwoFactorGuard)
   async blockUser(
     @Req() req: RequestWithUser,
-    @Body() body: { relatedUserId: string },
+    @Body() relatedUser: RelatedUserDto,
   ) {
-    if (req.user.id === body.relatedUserId)
+    if (req.user.id === relatedUser.id)
       throw new HttpException(
         'Forbidden, Can not send request',
         HttpStatus.FORBIDDEN,
       );
-    return await this.usersService.blockUser(req.user.id, body.relatedUserId);
+    return await this.usersService.blockUser(req.user.id, relatedUser.id);
   }
 
   @Post('unblock')
   @UseGuards(JwtTwoFactorGuard)
   async unblockUser(
     @Req() req: RequestWithUser,
-    @Body() body: { relatedUserId: string },
+    @Body() relatedUser: RelatedUserDto,
   ) {
-    if (req.user.id === body.relatedUserId)
+    if (req.user.id === relatedUser.id)
       throw new HttpException(
         'Forbidden, Can not send request',
         HttpStatus.FORBIDDEN,
       );
-    return await this.usersService.unblockUser(req.user.id, body.relatedUserId);
+    return await this.usersService.unblockUser(req.user.id, relatedUser.id);
   }
 
   @Get('id/:id/friends')

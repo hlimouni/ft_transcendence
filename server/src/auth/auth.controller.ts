@@ -3,7 +3,9 @@ import { AuthService } from './auth.service';
 import { AuthGuard } from '@nestjs/passport';
 import { Request, Response } from 'express';
 import RequestWithUser from 'src/users/interfaces/requestWithUser.interface';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Authentication')
 @Controller('auth/42')
 export class AuthController {
   constructor(private authService: AuthService) {}
