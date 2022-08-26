@@ -5,15 +5,22 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { User } from '../../utils/interfaces';
+import { User } from '../../../utils/interfaces';
 import { flexbox, style } from '@mui/system';
-import IMGBACK from '../../../files/backgroungUsers.jpeg'
+import IMGBACK from '../../../../files/backgroungUsers.jpeg'
 import Image from 'next/image';
 import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import Grid from '@mui/material/Grid';
+import { useContext, useState, useEffect } from 'react';
+import { AppContext } from '../../../context/AppContext';
+import { addFriend } from '../../../utils/utils';
+import axios from 'axios';
 
-export default function UserCard(props: User) {
+export default function UserCard(props: any) {
+    const { state, setUsers, setMainUser, setTkhar } = useContext(AppContext);
+    console.log("ids:", props.pendingIds)
+    console.log(props.pendingIds.includes(props.id));
     return (
         // <Card sx={{ minWidth: 240, Height: 200 }} style={{ margin: "20px" }}>
         //     <CardMedia className="user_image"
@@ -62,7 +69,12 @@ export default function UserCard(props: User) {
                             </div>
                         </div>
                         <div className="card_btns" style={{ display: "flex" }}>
-                            <Button size="small" color='success' variant="outlined" >Add Friend</Button>
+                            {
+                            !props.pendingIds?.includes(props.id) ?
+                            <Button size="small" color='primary' variant="outlined" onClick={e=>{e.defaultPrevented; addFriend(state.mainUser.id,props.id); setTkhar("dfdd")}}>Add Friend</Button> :
+                            <Button size="small" color='warning' variant="outlined" >Pending</Button>
+
+                            }
                             <Button size="small" color='error' variant="outlined">Block</Button>
                         </div>
                     </div>

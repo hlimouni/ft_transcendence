@@ -7,8 +7,10 @@ import Box from '@mui/material/Box';
 
 export default function Loading() {
     return (
-        <Box>
-            <CircularProgress />
-        </Box>
+        <div className='loadingDiv'>
+            <Box>
+                <CircularProgress />
+            </Box>
+        </div>
     )
 }

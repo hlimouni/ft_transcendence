@@ -13,6 +13,7 @@ export const AppProvider = (props: any) => {
     const [receiver, setReceiver] = useState<User | Channel | null>(null);
     const [friends, setFriends] = useState<User | null>(null);
     const [users, setUsers] = useState<User[] | null>(null);
+    const [tkhar, setTkhar] = useState("");
 
     const [isUserJoinedChannel, setIsUserJoinedChannel] = useState<boolean>(
         false
@@ -36,6 +37,7 @@ export const AppProvider = (props: any) => {
                     // chatSocket,
                     users,
                     onlineGames,
+                    tkhar
                 },
                 setLogin,
                 setMessages,
@@ -46,7 +48,8 @@ export const AppProvider = (props: any) => {
                 setMainUser,
                 setIsUserJoinedChannel,
                 setOnlineGames,
-                setUsers
+                setUsers,
+                setTkhar
             }}
         >
             {props.children}

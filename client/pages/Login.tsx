@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import { Container } from '@mui/material';
 import Button from '@mui/material/Button';
 import Image from "next/image";
-import IMG1 from '../../files/pong1.png'
+import IMG1 from '../../files/pong.png'
 
 const Login = () => {
     return (
