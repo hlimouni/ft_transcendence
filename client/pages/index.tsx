@@ -8,6 +8,7 @@ import styles from '../styles/Home.module.css'
 import Login from './Login'
 import { AppContext } from '../context/AppContext'
 import Loading from '../components/Login/Loading'
+import MiniDrawer from '../components/Layout'
 
 const Home: NextPage = () => {
   const [isLogin, setisLogin] = useState<boolean>(false);
@@ -41,7 +42,8 @@ const Home: NextPage = () => {
         <Login />
       ) : (
         (!state.mainUser ? <Loading /> :
-          <Profile />
+          // <Profile />
+          <MiniDrawer />
         )
       )
       }
