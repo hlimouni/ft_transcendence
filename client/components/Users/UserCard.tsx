@@ -5,16 +5,16 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { User } from '../../../utils/interfaces';
+import { User } from '../../utils/interfaces';
 import { flexbox, style } from '@mui/system';
-import IMGBACK from '../../../../files/backgroungUsers.jpeg'
+import IMGBACK from '../../../files/backgroungUsers.jpeg'
 import Image from 'next/image';
 import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import Grid from '@mui/material/Grid';
 import { useContext, useState, useEffect } from 'react';
-import { AppContext } from '../../../context/AppContext';
-import { addFriend } from '../../../utils/utils';
+import { AppContext } from '../../context/AppContext';
+import { addFriend } from '../../utils/utils';
 import axios from 'axios';
 
 export default function UserCard(props: any) {

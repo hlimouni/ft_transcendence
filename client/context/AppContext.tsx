@@ -2,7 +2,7 @@ import { FaxRounded } from "@mui/icons-material";
 import React, { ReactNode, createContext, useState, useRef, useEffect } from "react";
 import { Message, Channel, User } from "../utils/interfaces";
 export const AppContext = createContext<any>({});
-// import { eventsSocket, chatSocket } from "./sockets";
+import { eventsSocket, chatSocket } from "./sockets";
 
 export const AppProvider = (props: any) => {
     const [login, setLogin] = useState<boolean>(false);
@@ -33,8 +33,8 @@ export const AppProvider = (props: any) => {
                     channels,
                     receiver,
                     isUserJoinedChannel,
-                    // eventsSocket,
-                    // chatSocket,
+                    eventsSocket,
+                    chatSocket,
                     users,
                     onlineGames,
                     tkhar
@@ -60,4 +60,4 @@ export const AppProvider = (props: any) => {
 const AppConsumer = AppContext.Consumer;
 
 export default AppProvider;
-// export { AppConsumer };
+export { AppConsumer };
