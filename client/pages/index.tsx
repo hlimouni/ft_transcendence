@@ -38,12 +38,13 @@ const Home: NextPage = () => {
   // console.log("test", isLogin);
   return (
     <div className="div">
+      
       {!isLogin ? (
         <Login />
       ) : (
         (!state.mainUser ? <Loading /> :
-          // <Profile />
-          <MiniDrawer />
+
+          <Profile />
         )
       )
       }
