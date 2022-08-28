@@ -20,9 +20,7 @@ const Home: NextPage = () => {
       .then((res) => {
         console.log("hey", res.data);
         setisLogin(true);
-        setTimeout(() => {
           setMainUser({ ...res.data });
-        }, 1000)
       })
       .catch(() => {
         console.log("error", `${process.env.SERVER_HOST}/users/me`)
