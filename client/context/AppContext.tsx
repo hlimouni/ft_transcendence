@@ -11,7 +11,8 @@ export const AppProvider = (props: any) => {
     const [contacts, setContacts] = useState<User[]>([]);
     const [channels, setChannels] = useState<Channel[]>([]);
     const [receiver, setReceiver] = useState<User | Channel | null>(null);
-    const [friends, setFriends] = useState<User | null>(null);
+    // const [friends, setFriends] = useState<User | null>(null);
+    const [friends, setFriends] = useState<User[]>([]);
     const [users, setUsers] = useState<User[] | null>(null);
     const [tkhar, setTkhar] = useState("");
 

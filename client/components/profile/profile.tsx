@@ -1,15 +1,23 @@
-import React, { useContext } from 'react'
-import { Button, Typography } from '@mui/material'
+import { stat } from 'fs'
+import React, { useContext, useState, useEffect } from 'react'
 import {AppContext} from '../../context/AppContext'
-
+import Cover from './cover'
+import MenuBar from './menubar'
+import { fetchFriends } from './utils'
 export default function Profile() {
-  const {state} = useContext(AppContext)
+  const {state} = useContext(AppContext);
+  const cntx = useContext(AppContext);
+
+	useEffect(() => {
+		console.log("state mainUser : effec ", state.mainUser);
+		if (state.mainUser) {
+			fetchFriends(cntx);
+		}
+	}, [state.mainUser]);
   return (
     <div>
-        <Typography variant='h1'>profile page</Typography>
-        <Button variant='contained'>Press me</Button>
-        <p>{state.mainUser.id}</p>
-        <p>{state.mainUser.userName}</p>
+        <Cover/>
+        <MenuBar/>
     </div>
   )
 }
