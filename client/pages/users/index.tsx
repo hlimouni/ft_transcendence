@@ -7,8 +7,8 @@ import { User } from '../../utils/interfaces'
 import { Container } from '@mui/material'
 
 const Users = () => {
-  const { state, setUsers, setMainUser } = useContext(AppContext)
-  const [friendsId, setfriendsId] = useState()
+  const { state, setUsers, setMainUser, setFriends } = useContext(AppContext)
+  const [friendsId, setfriendsId] = useState<any[]>([])
   const [pendingIds, setpendingIds] = useState<any[]>([])
 
   useEffect(() => {
@@ -24,6 +24,7 @@ const Users = () => {
     if (state.mainUser) {
       fetchUsers()
       fetchpendingIds()
+      fetchFriends()
     }
   }, [state.mainUser])
 
@@ -31,18 +32,29 @@ const Users = () => {
     axios
       .get(`${process.env.SERVER_HOST}/users`, { withCredentials: true })
       .then((res) => {
-        setTimeout(() => {
           setUsers(
             res.data.filter((user: User) => {
               return user.id != state.mainUser.id
             }),
           )
-        }, 1000)
       })
       .catch(() => {
         console.log('error!!!')
       })
   }
+
+  async function fetchFriends() {
+    try {
+      var res = await axios.get(`${process.env.SERVER_HOST}/users/id/${state.mainUser.id}/friends`, {withCredentials: true})
+      
+        setFriends([...res.data]);
+        setfriendsId([...res.data].map((e) => e.id))
+        console.log("friends",res.data);
+    } catch (error) {
+      
+    }
+  }
+
 
   // fetchpendingIds();
   async function fetchpendingIds() {
@@ -75,7 +87,7 @@ const Users = () => {
           <div className="condiv">
             {state.users.map((user: any) => {
               return (
-                <UserCard key={user.id} {...user} pendingIds={pendingIds} />
+                <UserCard key={user.id} {...user} pendingIds={pendingIds} friendsId={friendsId} />
               )
             })}
           </div>

@@ -15,7 +15,7 @@ export function checkMessage(input: string) {
 
 export function addFriend(sender: string, target: string) {
 	//remove sender plzplz
-	console.log("send friend request : ", target , "   ", sender);
+	// console.log("send friend request : ", target , "   ", sender);
 	try {
 		axios
 			.post(

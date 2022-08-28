@@ -7,15 +7,18 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { User } from '../../utils/interfaces';
 import { flexbox, style } from '@mui/system';
-import IMGBACK from '../../../files/backgroungUsers.jpeg'
+import IMGBACK from '../../public/backgroungUsers.jpeg'
 import Image from 'next/image';
 import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import Grid from '@mui/material/Grid';
 import { useContext, useState, useEffect } from 'react';
 import { AppContext } from '../../context/AppContext';
-import { addFriend } from '../../utils/utils';
+import { addFriend, unfriend } from '../../utils/utils';
 import axios from 'axios';
+import PersonRemoveAlt1Icon from '@mui/icons-material/PersonRemoveAlt1';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import DoneIcon from '@mui/icons-material/Done';
 
 export default function UserCard(props: any) {
     const { state, setUsers, setMainUser, setTkhar } = useContext(AppContext);
@@ -69,10 +72,28 @@ export default function UserCard(props: any) {
                             </div>
                         </div>
                         <div className="card_btns" style={{ display: "flex" }}>
-                            {
+                            {props.friendsId.includes(props.id)?
+                            <Button
+                                size="small"
+                                color='info'
+                                variant="outlined"
+                                onClick={e=>{e.defaultPrevented; unfriend(state.mainUser.id,props.id);}}>
+                                    <PersonRemoveAlt1Icon></PersonRemoveAlt1Icon>Unfriend
+                            </Button>:
                             !props.pendingIds?.includes(props.id) ?
-                            <Button size="small" color='primary' variant="outlined" onClick={e=>{e.defaultPrevented; addFriend(state.mainUser.id,props.id); setTkhar("dfdd")}}>Add Friend</Button> :
-                            <Button size="small" color='warning' variant="outlined" >Pending</Button>
+                            <Button
+                                size="small"
+                                color='primary'
+                                variant="outlined"
+                                onClick={e=>{e.defaultPrevented; addFriend(state.mainUser.id,props.id); setTkhar("dfdd")}}>
+                                    <PersonAddIcon></PersonAddIcon>Add Friend
+                            </Button> :
+                            <Button
+                                size="small"
+                                color='warning'
+                                variant="contained" >
+                                    <DoneIcon></DoneIcon>Pending
+                            </Button>
 
                             }
                             <Button size="small" color='error' variant="outlined">Block</Button>
