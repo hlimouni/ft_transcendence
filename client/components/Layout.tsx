@@ -33,13 +33,14 @@ import PersonIcon from '@mui/icons-material/Person'
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports'
 import PodcastsIcon from '@mui/icons-material/Podcasts'
 import LayoutStyle from '../styles/Layout.module.css'
+import Link from 'next/link'
 
 const pages = [
-  { name: 'Profile', icon: <PersonIcon /> },
-  { name: 'Chat', icon: <MessageIcon /> },
-  { name: 'Users', icon: <GroupIcon /> },
-  { name: 'Game', icon: <SportsEsportsIcon /> },
-  { name: 'Live', icon: <PodcastsIcon /> },
+  { name: 'Profile', icon: <PersonIcon />, path: "/" },
+  { name: 'chat', icon: <MessageIcon />, path: "chat" },
+  { name: 'users', icon: <GroupIcon />, path: "users" },
+  { name: 'Game', icon: <SportsEsportsIcon />, path: "Game" },
+  { name: 'Live', icon: <PodcastsIcon />, path: "Live" },
 ]
 
 const ProfileButton = ({ state }: { state: any }) => {
@@ -320,8 +321,8 @@ const Layout = ({ children }: { children: any }) => {
                         return (
                           <ListItem disablePadding key={index}>
                             <ListItemButton sx={{ padding: '20px' }}>
-                              <ListItemIcon>{page.icon}</ListItemIcon>
-                              <ListItemText>{page.name}</ListItemText>
+                                <ListItemIcon><a href={`${page.path}`}>{page.icon}</a></ListItemIcon>
+                                <ListItemText><a href={`${page.path}`}>{page.name}</a></ListItemText>
                             </ListItemButton>
                           </ListItem>
                         )
