@@ -76,6 +76,18 @@ a {
 }
 
 /* ################################################## users cards ################################################## */
+
+.usersDiv {
+  background-color: #212b36;
+  border-radius: 12px;
+  height: calc(100vh - 100px);
+  margin: auto;
+  width: 70%;
+  align-items: center;
+  justify-content: center;
+  
+}
+
 .condiv{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -88,13 +100,14 @@ a {
   list-style-type: none;
 }
 body {
+  /* min-width: 610px; */
   background-color:rgb(54, 54, 54);
   /* background-color: black; */
   /* background-image: url(../../files/pongbackg.jpeg); */
 }
 .card {
   position: relative;
-  display: block;
+  /* display: block; */
   width: 250px;
   height: 220px;
   border-radius: 20px;
@@ -102,7 +115,7 @@ body {
   text-decoration: none;
 }
 
-.card_image {      
+.card_image {
   width: 100%;
   height: auto;
 }
