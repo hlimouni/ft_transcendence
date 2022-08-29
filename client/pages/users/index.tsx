@@ -76,11 +76,12 @@ const Users = () => {
   // },[pendingIds])
 
   return (
-    <Container style={{ color: 'white', padding: '0px' }}>
+    <>
+    {/* <Container style={{ color: 'white', padding: '0px' }}> */}
       {!state.users ? (
         <Loading />
       ) : (
-        <div>
+        <div className='usersDiv'>
           <h1 style={{ paddingLeft: '10px', textDecoration: 'underline' }}>
             Users
           </h1>
@@ -93,7 +94,8 @@ const Users = () => {
           </div>
         </div>
       )}
-    </Container>
+    {/* </Container> */}
+    </>
   )
 }
 
