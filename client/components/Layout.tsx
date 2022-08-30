@@ -37,11 +37,11 @@ import Link from 'next/link'
 import { acceptFriendRequest, unfriend } from '../utils/utils'
 
 const pages = [
-  { name: 'Profile', icon: <PersonIcon />, path: '/' },
-  { name: 'chat', icon: <MessageIcon />, path: '/chat' },
-  { name: 'users', icon: <GroupIcon />, path: '/users' },
-  { name: 'Game', icon: <SportsEsportsIcon />, path: '/game' },
-  { name: 'Live', icon: <PodcastsIcon />, path: '/live' },
+  { name: 'Profile', icon: <PersonIcon color='primary' />, path: '/' },
+  { name: 'Chat', icon: <MessageIcon color='primary' />, path: '/chat' },
+  { name: 'Users', icon: <GroupIcon color='primary' />, path: '/users' },
+  { name: 'Game', icon: <SportsEsportsIcon color='primary' />, path: '/game' },
+  { name: 'Live', icon: <PodcastsIcon color='primary' />, path: '/live' },
 ]
 
 const ProfileButton = ({ state }: { state: any }) => {
@@ -343,7 +343,7 @@ const Layout = ({ children }: { children: any }) => {
               </div>
               <div className={LayoutStyle.main_content}>
                 <div className={LayoutStyle.main_nav}>
-                  <nav style={{ color: 'white' }}>
+                  <nav style={{ color: '#6D5DD3' }}>
                     <List>
                       {pages.map((page, index) => {
                         return (
