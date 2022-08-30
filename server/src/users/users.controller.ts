@@ -30,8 +30,20 @@ export class UsersController {
 
   @Get()
   @UseGuards(JwtTwoFactorGuard)
-  async getUsers() {
-    return await this.usersService.getUsers();
+  async getUsers(@Req() req: RequestWithUser) {
+    return await this.usersService.getUsers().then(async (allUsers) => {
+      const blockedBy = await this.usersService.getBlockedByUsers(req.user.id);
+      if (blockedBy.length) {
+        const BlockedIds = blockedBy.map((user) => {
+          return user.id;
+        });
+        return allUsers.filter((user) => {
+          return !BlockedIds.includes(user.id);
+        });
+      } else {
+        return await this.usersService.getUsers();
+      }
+    });
   }
 
   @Get('me')
