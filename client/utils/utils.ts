@@ -32,6 +32,7 @@ export function addFriend(sender: string, target: string) {
 	} catch (error) {}
 }
 export function acceptFriendRequest(accpter: string, relatedUserId: string) {
+	console.log("accept friend request ");
 	try {
 		axios
 			.post(

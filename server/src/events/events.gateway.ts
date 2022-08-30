@@ -214,6 +214,7 @@ export class EventsGateway implements OnGatewayConnection, OnGatewayDisconnect {
       this.Server.to(socketsID).emit('NEW_PENDING_REQUEST');
     });
     setTimeout(() => {
+      console.log('update date of friend request ');
       this.Server.emit('UPDATE_DATA');
     }, 500);
   }
