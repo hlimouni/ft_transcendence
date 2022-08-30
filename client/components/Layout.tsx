@@ -34,13 +34,14 @@ import SportsEsportsIcon from '@mui/icons-material/SportsEsports'
 import PodcastsIcon from '@mui/icons-material/Podcasts'
 import LayoutStyle from '../styles/Layout.module.css'
 import Link from 'next/link'
+import { acceptFriendRequest, unfriend } from '../utils/utils'
 
 const pages = [
-  { name: 'Profile', icon: <PersonIcon />, path: "/" },
-  { name: 'chat', icon: <MessageIcon />, path: "chat" },
-  { name: 'users', icon: <GroupIcon />, path: "users" },
-  { name: 'Game', icon: <SportsEsportsIcon />, path: "Game" },
-  { name: 'Live', icon: <PodcastsIcon />, path: "Live" },
+  { name: 'Profile', icon: <PersonIcon />, path: '/' },
+  { name: 'chat', icon: <MessageIcon />, path: '/chat' },
+  { name: 'users', icon: <GroupIcon />, path: '/users' },
+  { name: 'Game', icon: <SportsEsportsIcon />, path: '/game' },
+  { name: 'Live', icon: <PodcastsIcon />, path: '/live' },
 ]
 
 const ProfileButton = ({ state }: { state: any }) => {
@@ -130,6 +131,14 @@ const FriendsRequestDropDown = ({ state }: { state: any }) => {
   useEffect(() => {
     fetchRecievedFriendsRequest()
     fetchSentFriendsRequest()
+    state.eventsSocket.on('A_USER_STATUS_UPDATED', (user: any) => {
+      fetchRecievedFriendsRequest()
+      fetchSentFriendsRequest()
+    })
+    state.eventsSocket.on('UPDATE_DATA', () => {
+      fetchRecievedFriendsRequest()
+      fetchSentFriendsRequest()
+    })
   }, [])
 
   async function fetchRecievedFriendsRequest() {
@@ -139,7 +148,10 @@ const FriendsRequestDropDown = ({ state }: { state: any }) => {
       })
       .then((res) => {
         console.log('freinds request : ', res.data)
-        if ([...res.data].length) setRecievedFriendRequests([...res.data])
+        if ([...res.data].length)
+          setRecievedFriendRequests([...res.data])
+        else
+          setRecievedFriendRequests([])
       })
       .catch(() => {
         console.log('error!!!')
@@ -153,6 +165,7 @@ const FriendsRequestDropDown = ({ state }: { state: any }) => {
       .then((res) => {
         console.log('sent request : ', res.data)
         if ([...res.data].length) setSentFriendRequests([...res.data])
+        else setSentFriendRequests([]);
       })
       .catch(() => {
         console.log('error!!!')
@@ -213,7 +226,7 @@ const FriendsRequestDropDown = ({ state }: { state: any }) => {
               key={friendRequest.id}
               sx={{
                 display: 'flex',
-                justifyContent: 'flex-start',
+                justifyContent: 'space-between',
                 alignContent: 'flex-start',
                 gap: '10px',
               }}
@@ -227,10 +240,22 @@ const FriendsRequestDropDown = ({ state }: { state: any }) => {
                 color="secondary"
                 aria-label="Disabled elevation buttons"
               >
-                <Button color="success" onClick={handleCloseUserMenu}>
+                <Button
+                  color="success"
+                  onClick={() => {
+                    acceptFriendRequest(state.mainUser.id, friendRequest.id)
+                    handleCloseUserMenu()
+                  }}
+                >
                   <CheckCircleIcon />
                 </Button>
-                <Button color="warning" onClick={handleCloseUserMenu}>
+                <Button
+                  color="warning"
+                  onClick={() => {
+                    unfriend(state.mainUser.id, friendRequest.id)
+                    handleCloseUserMenu()
+                  }}
+                >
                   <CancelIcon />
                 </Button>
               </ButtonGroup>
@@ -255,8 +280,8 @@ const FriendsRequestDropDown = ({ state }: { state: any }) => {
               onClick={handleCloseUserMenu}
               sx={{
                 display: 'flex',
-                justifyContent: 'flex-start',
                 alignContent: 'flex-start',
+                justifyContent: 'space-between',
                 gap: '10px',
               }}
             >
@@ -272,10 +297,13 @@ const FriendsRequestDropDown = ({ state }: { state: any }) => {
                 color="secondary"
                 aria-label="Disabled elevation buttons"
               >
-                <Button color="success" onClick={handleCloseUserMenu}>
-                  <CheckCircleIcon />
-                </Button>
-                <Button color="warning" onClick={handleCloseUserMenu}>
+                <Button
+                  color="warning"
+                  onClick={() => {
+                    unfriend(state.mainUser.id, sentFriendRequest.id)
+                    handleCloseUserMenu()
+                  }}
+                >
                   <CancelIcon />
                 </Button>
               </ButtonGroup>
@@ -319,12 +347,16 @@ const Layout = ({ children }: { children: any }) => {
                     <List>
                       {pages.map((page, index) => {
                         return (
-                          <ListItem disablePadding key={index}>
-                            <ListItemButton sx={{ padding: '20px' }}>
-                                <ListItemIcon><a href={`${page.path}`}>{page.icon}</a></ListItemIcon>
-                                <ListItemText><a href={`${page.path}`}>{page.name}</a></ListItemText>
-                            </ListItemButton>
-                          </ListItem>
+                          <Link href={page.path} key={index}>
+                            <a href="">
+                              <ListItem disablePadding>
+                                <ListItemButton sx={{ padding: '20px' }}>
+                                  <ListItemIcon>{page.icon}</ListItemIcon>
+                                  <ListItemText>{page.name}</ListItemText>
+                                </ListItemButton>
+                              </ListItem>
+                            </a>
+                          </Link>
                         )
                       })}
                     </List>

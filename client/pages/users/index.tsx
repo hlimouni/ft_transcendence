@@ -9,7 +9,7 @@ import { Container } from '@mui/material'
 const Users = () => {
   const { state, setUsers, setMainUser, setFriends } = useContext(AppContext)
   const [friendsId, setfriendsId] = useState<any[]>([])
-  const [pendingIds, setpendingIds] = useState<any[]>([])
+  const [pendingRequestsIds, setPendingRequestsIds] = useState<any[]>([])
 
   useEffect(() => {
     axios
@@ -23,8 +23,21 @@ const Users = () => {
   useEffect(() => {
     if (state.mainUser) {
       fetchUsers()
-      fetchpendingIds()
+      fetchpendingRequests()
       fetchFriends()
+      state.eventsSocket.on("A_USER_STATUS_UPDATED", (user: any) => {
+        fetchUsers();
+        fetchFriends();
+        fetchpendingRequests()
+        console.log("user online data");   
+      });
+      state.eventsSocket.on("UPDATE_DATA", () => {
+        fetchUsers();
+        fetchFriends();
+        fetchpendingRequests()
+        console.log("update data");        
+      });
+  
     }
   }, [state.mainUser])
 
@@ -57,16 +70,16 @@ const Users = () => {
 
 
   // fetchpendingIds();
-  async function fetchpendingIds() {
+  async function fetchpendingRequests() {
     try {
       var res = await axios.get(
         `${process.env.SERVER_HOST}/users/sentrequests`,
         { withCredentials: true },
       )
       if (res.data.length) {
-        setpendingIds([...res.data].map((e) => e.id))
+        setPendingRequestsIds([...res.data].map((e) => e.id))
       } else {
-        setpendingIds([])
+        setPendingRequestsIds([])
         console.log('no friend request')
       }
     } catch (error) {}
@@ -88,7 +101,7 @@ const Users = () => {
           <div className="condiv">
             {state.users.map((user: any) => {
               return (
-                <UserCard key={user.id} {...user} pendingIds={pendingIds} friendsId={friendsId} />
+                <UserCard key={user.id} {...user} pendingRequestsIds={pendingRequestsIds} friendsId={friendsId} />
               )
             })}
           </div>
