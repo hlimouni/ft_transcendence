@@ -142,28 +142,33 @@ export class UsersService {
       +relatedUserID > +relatingUserID ? relatedUserID : relatingUserID;
     const userWithSmallID =
       +relatedUserID < +relatingUserID ? relatedUserID : relatingUserID;
-
     const relation = await this.friendsRepository.findOne({
       where: [{ userA: userWithBigID, userB: userWithSmallID }],
     });
 
     if (
-      relation?.state != State.BLOCKED_A_B &&
-      relation?.state != State.BLOCKED_B_A
+      !relation ||
+      (relation?.state != State.BLOCKED_A_B &&
+        relation?.state != State.BLOCKED_B_A)
     ) {
       const stateDir: State =
         relatingUserID == userWithBigID ? State.BLOCKED_A_B : State.BLOCKED_B_A;
 
-      await this.friendsRepository
-        .createQueryBuilder()
-        .update({ state: stateDir })
-        .where([
-          {
-            userA: userWithBigID,
-            userB: userWithSmallID,
-          },
-        ])
-        .execute();
+      await this.friendsRepository.save({
+        userA: userWithBigID,
+        userB: userWithSmallID,
+        state: stateDir,
+      });
+      // await this.friendsRepository
+      //   .createQueryBuilder()
+      //   .update({ state: stateDir })
+      //   .where([
+      //     {
+      //       userA: userWithBigID,
+      //       userB: userWithSmallID,
+      //     },
+      //   ])
+      //   .execute();
     } else {
       throw new HttpException(
         'Forbidden, Can not block user',
