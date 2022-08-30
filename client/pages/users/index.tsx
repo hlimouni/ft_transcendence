@@ -95,7 +95,7 @@ const Users = () => {
         <Loading />
       ) : (
         <div className='usersDiv'>
-          <h1 style={{ paddingLeft: '10px', textDecoration: 'underline' }}>
+          <h1 style={{ color: 'white', paddingLeft: '10px', textDecoration: 'underline' }}>
             Users
           </h1>
           <div className="condiv">

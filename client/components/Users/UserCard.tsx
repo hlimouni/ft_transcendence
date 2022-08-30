@@ -25,7 +25,8 @@ export default function UserCard(props: any) {
   console.log('ids:', props.pendingIds)
   console.log(props.pendingRequestsIds.includes(props.id))
   return (
-    // <Card sx={{ minWidth: 240, Height: 200 }} style={{ margin: "20px" }}>
+    <>
+    {/* // <Card sx={{ minWidth: 240, Height: 200 }} style={{ margin: "20px" }}>
     //     <CardMedia className="user_image"
     //         component="img"
     //         height="200"
@@ -43,7 +44,7 @@ export default function UserCard(props: any) {
     //         <Button size="small" color='success' variant="outlined" >Add Friend</Button>
     //         <Button size="small" color='error' variant="outlined">Block</Button>
     //     </CardActions>
-    // </Card>
+    // </Card> */}
 
     <ul className="cards">
       <li>
@@ -100,14 +101,13 @@ export default function UserCard(props: any) {
                   onClick={(e) => {
                     e.defaultPrevented
                     addFriend(state.mainUser.id, props.id)
-                    setTkhar('dfdd')
                   }}
                 >
                   <PersonAddIcon></PersonAddIcon>Add Friend
                 </Button>
               ) : (
-                <Button size="small" color="warning" variant="contained">
-                  <DoneIcon></DoneIcon>Pending
+                <Button className='cancelRqstBtn' size="small" variant="contained">
+                  Cancel
                 </Button>
               )}
               <Button
@@ -125,5 +125,6 @@ export default function UserCard(props: any) {
         </div>
       </li>
     </ul>
+    </>
   )
 }
