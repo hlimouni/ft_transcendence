@@ -114,8 +114,7 @@ export default function UserCard(props: any) {
                 size="small"
                 color="error"
                 variant="outlined"
-                onClick={(e) => {
-                  e.defaultPrevented
+                onClick={() => {
                   blockUser(state.mainUser.id, props.id)
                 }}
               >
