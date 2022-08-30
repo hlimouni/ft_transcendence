@@ -21,10 +21,24 @@
 .main_nav
 {
     height: calc(100vh - 80px);
-    background-color: #28282b;
-    width: 300px;
+    background-color: #33353c;
+    width: 70px;
     display: inline-block;
+    overflow: hidden;
+    transition: 0.5s;
+    font-size: 20px;
 }
+.main_nav:hover{
+    width: 300px;
+    transition: 0.5s;
+}
+.main_nav ul li:hover 
+{
+    background-color: #7463e1;
+    color: white;
+    fill: aqua;
+}
+
 .main_content
 {
     display: flex;
