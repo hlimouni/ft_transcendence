@@ -80,7 +80,7 @@ a {
 .usersDiv {
   background-color: #212b36;
   border-radius: 12px;
-  height: calc(100vh - 100px);
+  min-height: calc(100vh - 100px);
   margin: auto;
   width: 70%;
   align-items: center;
@@ -89,10 +89,28 @@ a {
 }
 
 .condiv{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  /* display: grid; */
+  /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
+  /* grid-template-columns: 300px 300px 300px 300px; */
+  padding: 50px;
+  display: flex;
+  gap: 20px;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
-
+@media screen and (max-width: 1137px) {
+  .condiv{
+    /* display: grid; */
+    /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
+    /* grid-template-columns: 300px 300px 300px 300px; */
+    padding: 50px;
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
 .cards {
   padding: 0px;
   display: flex;
@@ -175,6 +193,15 @@ body {
   overflow: hidden;
 }
 
+.cancelRqstBtn {
+  background-color:rgb(54, 54, 54);
+  color: rgb(221, 221, 221);
+  width: 150px;
+}
+
+.cancelRqstBtn:hover {
+  background-color: rgb(70, 70, 70);
+}
 
 .Online_point {
   display: inline-block;
