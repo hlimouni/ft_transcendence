@@ -35,14 +35,7 @@ import PodcastsIcon from '@mui/icons-material/Podcasts'
 import LayoutStyle from '../styles/Layout.module.css'
 import Link from 'next/link'
 import { acceptFriendRequest, unfriend } from '../utils/utils'
-
-const pages = [
-  { name: 'Profile', icon: <PersonIcon color='primary' />, path: '/' },
-  { name: 'Chat', icon: <MessageIcon color='primary' />, path: '/chat' },
-  { name: 'Users', icon: <GroupIcon color='primary' />, path: '/users' },
-  { name: 'Game', icon: <SportsEsportsIcon color='primary' />, path: '/game' },
-  { name: 'Live', icon: <PodcastsIcon color='primary' />, path: '/live' },
-]
+import { useRouter } from 'next/router'
 
 const ProfileButton = ({ state }: { state: any }) => {
   const settings = [
@@ -148,10 +141,8 @@ const FriendsRequestDropDown = ({ state }: { state: any }) => {
       })
       .then((res) => {
         console.log('freinds request : ', res.data)
-        if ([...res.data].length)
-          setRecievedFriendRequests([...res.data])
-        else
-          setRecievedFriendRequests([])
+        if ([...res.data].length) setRecievedFriendRequests([...res.data])
+        else setRecievedFriendRequests([])
       })
       .catch(() => {
         console.log('error!!!')
@@ -165,7 +156,7 @@ const FriendsRequestDropDown = ({ state }: { state: any }) => {
       .then((res) => {
         console.log('sent request : ', res.data)
         if ([...res.data].length) setSentFriendRequests([...res.data])
-        else setSentFriendRequests([]);
+        else setSentFriendRequests([])
       })
       .catch(() => {
         console.log('error!!!')
@@ -316,6 +307,53 @@ const FriendsRequestDropDown = ({ state }: { state: any }) => {
 }
 
 const Layout = ({ children }: { children: any }) => {
+  const pages = [
+    {
+      name: 'Profile',
+      icon: <PersonIcon/>,
+      path: '/',
+      selected: true,
+    },
+    {
+      name: 'Chat',
+      icon: <MessageIcon />,
+      path: '/chat',
+      selected: false,
+    },
+    {
+      name: 'Users',
+      icon: <GroupIcon />,
+      path: '/users',
+      selected: false,
+    },
+    {
+      name: 'Game',
+      icon: <SportsEsportsIcon />,
+      path: '/game',
+      selected: false,
+    },
+    {
+      name: 'Live',
+      icon: <PodcastsIcon />,
+      path: '/live',
+      selected: false,
+    },
+  ]
+  const [sideMenu, setSideMenu] = useState([...pages])
+
+  const router = useRouter()
+  useEffect(() => {
+    const menu = [...sideMenu].map((item) => {
+      return { ...item, active: false }
+    })
+    const newMenu = menu.map((item) => {
+      return {
+        ...item,
+        selected: item.path === router.pathname ? true : false,
+      }
+    })
+    setSideMenu(newMenu)
+  }, [router])
   return (
     <AppConsumer>
       {({ state }) => {
@@ -343,21 +381,58 @@ const Layout = ({ children }: { children: any }) => {
               </div>
               <div className={LayoutStyle.main_content}>
                 <div className={LayoutStyle.main_nav}>
-                  <nav style={{ color: '#6D5DD3' }}>
+                  <nav style={{ color: '#6D5DD3' , padding: '0px 5px' }}>
                     <List>
-                      {pages.map((page, index) => {
-                        return (
-                          <Link href={page.path} key={index}>
-                            <a href="">
-                              <ListItem disablePadding>
-                                <ListItemButton sx={{ padding: '20px' }}>
-                                  <ListItemIcon>{page.icon}</ListItemIcon>
-                                  <ListItemText>{page.name}</ListItemText>
-                                </ListItemButton>
-                              </ListItem>
-                            </a>
-                          </Link>
-                        )
+                      {sideMenu.map((page, index) => {
+                        if (page.selected) {
+                          return (
+                            <Link href={page.path} key={index}>
+                              <a href="">
+                                <ListItem
+                                  disablePadding
+                                  sx={{
+                                    backgroundColor: '#7463e1 !important',
+                                    color: 'white',
+                                    borderRadius: '20px',
+                                  }}
+                                >
+                                  <ListItemButton
+                                    sx={{
+                                      padding: '20px',
+                                      borderRadius: '20px',
+                                    }}
+                                  >
+                                    <ListItemIcon>{page.icon}</ListItemIcon>
+                                    <ListItemText>{page.name}</ListItemText>
+                                  </ListItemButton>
+                                </ListItem>
+                              </a>
+                            </Link>
+                          )
+                        } else {
+                          return (
+                            <Link href={page.path} key={index}>
+                              <a href="">
+                                <ListItem
+                                  disablePadding
+                                  sx={{
+                                    borderRadius: '20px',
+                                  }}
+                                >
+                                  <ListItemButton
+                                    sx={{
+                                      padding: '20px',
+                                      borderRadius: '20px',
+                                    }}
+                                  >
+                                    <ListItemIcon>{page.icon}</ListItemIcon>
+                                    <ListItemText>{page.name}</ListItemText>
+                                  </ListItemButton>
+                                </ListItem>
+                              </a>
+                            </Link>
+                          )
+                        }
                       })}
                     </List>
                   </nav>
