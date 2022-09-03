@@ -6,7 +6,6 @@ const MenuBar = (props: Props) => {
   return (
     <div>
         <ul>
-            <li><a href='#'>Edit</a></li>
             <li><a href='#'>Profile</a></li>
             <li><a href='#'>Friends</a></li>
             <li><a href='#'>History</a></li>
