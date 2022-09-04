@@ -34,13 +34,15 @@
 }
 .main_nav ul li
 {
-    border-radius: 20px;
+    border-radius: 5px;
+    margin-bottom: 5px;
 }
 .main_nav ul li:hover 
 {
-    background-color: #7463e1;
-    border-radius: 20px;
+    background-color: #29384b;
+    border-radius: 5px;
     color: white;
+    font-weight: bold;
 }
 
 .main_content

@@ -372,7 +372,7 @@ const Layout = ({ children }: { children: any }) => {
                     width: '250px',
                   }}
                 >
-                  <img src="/pong.png" alt="logo" height="30px" />
+                  <img src="/pong1.png" alt="logo" height="30px" />
                 </div>
                 <div className={LayoutStyle.account_setting}>
                   <FriendsRequestDropDown state={state} />
@@ -381,7 +381,7 @@ const Layout = ({ children }: { children: any }) => {
               </div>
               <div className={LayoutStyle.main_content}>
                 <div className={LayoutStyle.main_nav}>
-                  <nav style={{ color: '#6D5DD3' , padding: '0px 5px' }}>
+                  <nav style={{ color: '#8f8f8f' , padding: '0px 5px' }}>
                     <List>
                       {sideMenu.map((page, index) => {
                         if (page.selected) {
@@ -391,15 +391,17 @@ const Layout = ({ children }: { children: any }) => {
                                 <ListItem
                                   disablePadding
                                   sx={{
-                                    backgroundColor: '#7463e1 !important',
-                                    color: 'white',
-                                    borderRadius: '20px',
+                                    backgroundColor: '#212b36 !important',
+                                    color: '#8f8f8f',
+                                    borderRadius: '5px',
+                                    fontWeight: "bold",
                                   }}
                                 >
                                   <ListItemButton
                                     sx={{
                                       padding: '20px',
-                                      borderRadius: '20px',
+                                      borderRadius: '5px',
+                                      fontWeight: 'bold',
                                     }}
                                   >
                                     <ListItemIcon>{page.icon}</ListItemIcon>
@@ -416,13 +418,13 @@ const Layout = ({ children }: { children: any }) => {
                                 <ListItem
                                   disablePadding
                                   sx={{
-                                    borderRadius: '20px',
+                                    borderRadius: '5px',
                                   }}
                                 >
                                   <ListItemButton
                                     sx={{
                                       padding: '20px',
-                                      borderRadius: '20px',
+                                      borderRadius: '5px',
                                     }}
                                   >
                                     <ListItemIcon>{page.icon}</ListItemIcon>
