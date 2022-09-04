@@ -9,7 +9,7 @@ const Cover = (props: Props) => {
 
   return (
     <div>
-       <img className='cover-image' src='james-webb.png' alt='cover image'/>
+       {/* <img className='cover-image' src='james-webb.png' alt='cover image'/> */}
        <div className='profile-banner'>
           <img src={state.mainUser.image} alt="User avatar"/>
           <h2>{state.mainUser.firstName} {state.mainUser.lastName}</h2>

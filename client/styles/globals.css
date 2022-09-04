@@ -59,7 +59,7 @@ a {
 }
 
 .Login form button:hover {
-  background-color: #6c5dd3;
+  background-color: #335aac;
 }
 
 .loadingDiv {
@@ -76,6 +76,12 @@ a {
 }
 
 /* ################################################## users cards ################################################## */
+
+.emptyusers {
+  color: white;
+  display: flex;
+  justify-content: center;
+}
 
 .usersDiv {
   background-color: #212b36;
@@ -195,8 +201,8 @@ body {
 
 .cancelRqstBtn {
   background-color:rgb(54, 54, 54);
-  color: rgb(221, 221, 221);
-  width: 150px;
+  color: rgb(185, 185, 185);
+  width: 110px;
 }
 
 .cancelRqstBtn:hover {

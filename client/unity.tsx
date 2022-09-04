@@ -17,7 +17,7 @@ export const themeOptions: ThemeOptions = {
       main: '#7fba7a',
     },
     info: {
-      main: '#7fba7a',
+      main: '#3164a7',
     },
     warning: {
       main: '#ff754b',
@@ -37,6 +37,6 @@ export const themeOptions: ThemeOptions = {
     fontWeightBold: 1000,
   },
   shape: {
-    borderRadius: 15,
+    borderRadius: 10,
   },
 };

@@ -14,14 +14,14 @@ import SportsEsportsIcon from '@mui/icons-material/SportsEsports'
 import Grid from '@mui/material/Grid'
 import { useContext, useState, useEffect } from 'react'
 import { AppContext } from '../../context/AppContext'
-import { addFriend, blockUser, unfriend } from '../../utils/utils'
+import { addFriend, blockUser, unfriend, unBlockUser } from '../../utils/utils'
 import axios from 'axios'
 import PersonRemoveAlt1Icon from '@mui/icons-material/PersonRemoveAlt1'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import DoneIcon from '@mui/icons-material/Done'
 
 export default function UserCard(props: any) {
-  const { state, setUsers, setMainUser, setTkhar } = useContext(AppContext)
+  const { state, setUsers, setMainUser, } = useContext(AppContext)
   console.log('ids:', props.pendingIds)
   console.log(props.pendingRequestsIds.includes(props.id))
   return (
@@ -82,44 +82,66 @@ export default function UserCard(props: any) {
             </div>
             <div className="card_btns" style={{ display: 'flex' }}>
               {props.friendsId.includes(props.id) ? (
-                <Button
-                  size="small"
-                  color="info"
-                  variant="outlined"
-                  onClick={(e) => {
-                    e.defaultPrevented
-                    unfriend(state.mainUser.id, props.id)
-                  }}
-                >
-                  <PersonRemoveAlt1Icon></PersonRemoveAlt1Icon>Unfriend
-                </Button>
-              ) : !props.pendingRequestsIds?.includes(props.id) ? (
-                <Button
-                  size="small"
-                  color="primary"
-                  variant="outlined"
-                  onClick={(e) => {
-                    e.defaultPrevented
-                    addFriend(state.mainUser.id, props.id)
-                  }}
-                >
-                  <PersonAddIcon></PersonAddIcon>Add Friend
-                </Button>
-              ) : (
-                <Button className='cancelRqstBtn' size="small" variant="contained">
-                  Cancel
-                </Button>
+                    <Button
+                      size="small"
+                      color="info"
+                      variant="outlined"
+                      onClick={(e) => {
+                        e.defaultPrevented
+                        unfriend(state.mainUser.id, props.id)
+                      }}
+                    >
+                      <PersonRemoveAlt1Icon></PersonRemoveAlt1Icon>Unfriend
+                    </Button>
+                  ) : !props.pendingRequestsIds?.includes(props.id) ? (
+                    <Button
+                      size="small"
+                      color="primary"
+                      variant="outlined"
+                      onClick={(e) => {
+                        e.defaultPrevented
+                        addFriend(state.mainUser.id, props.id)
+                      }}
+                    >
+                      <PersonAddIcon></PersonAddIcon>Add Friend
+                    </Button>
+                  ) : (
+                    <Button 
+                      className='cancelRqstBtn'
+                      size="small"
+                      variant="contained"
+                      onClick={(e) => {
+                        e.defaultPrevented
+                        unfriend(state.mainUser.id, props.id)
+                      }}
+                      >
+                      Cancel
+                    </Button>
               )}
-              <Button
-                size="small"
-                color="error"
-                variant="outlined"
-                onClick={() => {
-                  blockUser(state.mainUser.id, props.id)
-                }}
-              >
-                Block
-              </Button>
+              {props.blockedUsersIds.includes(props.id) ? (
+                    <Button
+                      size="small"
+                      color="error"
+                      variant="outlined"
+                      onClick={() => {
+                        unBlockUser(state.mainUser.id, props.id)
+                      }}
+                    >
+                      UnBlock
+                    </Button>
+
+              ):(
+                      <Button
+                      size="small"
+                      color="error"
+                      variant="outlined"
+                      onClick={() => {
+                        blockUser(state.mainUser.id, props.id)
+                      }}
+                    >
+                      Block
+                    </Button>
+              )}
             </div>
           </div>
         </div>
