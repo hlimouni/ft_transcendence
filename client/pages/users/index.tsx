@@ -125,7 +125,7 @@ const Users = () => {
           </h1>
           
             {state.users.length == 0 ?
-            (<div className='emptyusers'>No Users Found</div>) : 
+            (<div className='emptyusers'>no users</div>) : 
             (
               <div className="condiv">
                 {state.users.map((user: any) => {
