@@ -28,10 +28,14 @@ import Button from '@mui/material/Button'
 import CancelIcon from '@mui/icons-material/Cancel'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import MessageIcon from '@mui/icons-material/Message'
+import MarkChatUnreadRoundedIcon from '@mui/icons-material/MarkChatUnreadRounded';
 import GroupIcon from '@mui/icons-material/Group'
 import PersonIcon from '@mui/icons-material/Person'
+import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
+import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports'
 import PodcastsIcon from '@mui/icons-material/Podcasts'
+import OndemandVideoRoundedIcon from '@mui/icons-material/OndemandVideoRounded';
 import LayoutStyle from '../styles/Layout.module.css'
 import Link from 'next/link'
 import { acceptFriendRequest, unfriend } from '../utils/utils'
@@ -310,13 +314,13 @@ const Layout = ({ children }: { children: any }) => {
   const pages = [
     {
       name: 'Profile',
-      icon: <PersonIcon/>,
+      icon: <PersonRoundedIcon/>,
       path: '/',
       selected: true,
     },
     {
       name: 'Chat',
-      icon: <MessageIcon />,
+      icon: <MarkChatUnreadRoundedIcon />,
       path: '/chat',
       selected: false,
     },
@@ -334,7 +338,7 @@ const Layout = ({ children }: { children: any }) => {
     },
     {
       name: 'Live',
-      icon: <PodcastsIcon />,
+      icon: <OndemandVideoRoundedIcon />,
       path: '/live',
       selected: false,
     },
@@ -362,25 +366,22 @@ const Layout = ({ children }: { children: any }) => {
         } else {
           return (
             <div className={LayoutStyle.layout}>
-              <div className={LayoutStyle.main_header}>
-                <div
-                  style={{
-                    height: '80px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    width: '250px',
-                  }}
-                >
-                  <img src="/pong1.png" alt="logo" height="30px" />
-                </div>
-                <div className={LayoutStyle.account_setting}>
-                  <FriendsRequestDropDown state={state} />
-                  <ProfileButton state={state} />
-                </div>
-              </div>
+              
               <div className={LayoutStyle.main_content}>
                 <div className={LayoutStyle.main_nav}>
+
+                  <div
+                        style={{
+                          height: '80px',
+                          marginBottom: '70px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                        }}
+                    >
+                        <img src="/pong.png" alt="logo" height="30px" />
+                  </div>
+
                   <nav style={{ color: '#8f8f8f' , padding: '0px 5px' }}>
                     <List>
                       {sideMenu.map((page, index) => {
@@ -391,21 +392,22 @@ const Layout = ({ children }: { children: any }) => {
                                 <ListItem
                                   disablePadding
                                   sx={{
-                                    backgroundColor: '#212b36 !important',
-                                    color: '#8f8f8f',
-                                    borderRadius: '5px',
-                                    fontWeight: "bold",
+                                    borderLeft: '3px solid #6c5dd3',
+                                    backgroundColor: '#2d090935 !important',
+                                    // background: 'linear-gradient(90deg, rgba(108,93,211,0.5914959733893557) 0%, rgba(108,93,211,0) 100%, rgba(0,212,255,0) 100%)',
+                                    color: '#ebebeb',
+                                    borderRadius: '0px',
                                   }}
                                 >
                                   <ListItemButton
                                     sx={{
                                       padding: '20px',
-                                      borderRadius: '5px',
-                                      fontWeight: 'bold',
+                                      borderRadius: '0px',
+                                      height: '60px',
                                     }}
                                   >
-                                    <ListItemIcon>{page.icon}</ListItemIcon>
-                                    <ListItemText>{page.name}</ListItemText>
+                                    <ListItemIcon >{page.icon}</ListItemIcon>
+                                    <ListItemText className={LayoutStyle.listItems}>{page.name}</ListItemText>
                                   </ListItemButton>
                                 </ListItem>
                               </a>
@@ -418,17 +420,18 @@ const Layout = ({ children }: { children: any }) => {
                                 <ListItem
                                   disablePadding
                                   sx={{
-                                    borderRadius: '5px',
+                                    borderRadius: '0px',
                                   }}
                                 >
                                   <ListItemButton
                                     sx={{
                                       padding: '20px',
-                                      borderRadius: '5px',
+                                      borderRadius: '0px',
+                                      height: '60px',
                                     }}
                                   >
                                     <ListItemIcon>{page.icon}</ListItemIcon>
-                                    <ListItemText>{page.name}</ListItemText>
+                                    <ListItemText className={LayoutStyle.listItems}>{page.name}</ListItemText>
                                   </ListItemButton>
                                 </ListItem>
                               </a>
@@ -439,7 +442,21 @@ const Layout = ({ children }: { children: any }) => {
                     </List>
                   </nav>
                 </div>
-                <main style={{ width: '100%' }}>{children}</main>
+                <div className={LayoutStyle.vl}></div>
+                
+                <div className={LayoutStyle.navwithmain}>
+                  <div className={LayoutStyle.main_header}>
+                      
+                      <div className={LayoutStyle.account_setting}>
+                        <FriendsRequestDropDown state={state} />
+                        <ProfileButton state={state} />
+                      </div>
+                  </div>
+                  <div>
+                    <main style={{ width: '100%' }}>{children}</main>
+                  </div>
+                </div>
+                  
               </div>
             </div>
           )
