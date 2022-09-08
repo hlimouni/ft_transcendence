@@ -1,15 +1,21 @@
 .layout
 {
     width: 100%;
+    /* display: block; */
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    /* flex-direction: row; */
+
 }
 .main_header
 {
     height: 80px;
     width: 100%;
-    background-color: #3E414A;
+    background-color: #122133;
     display: block;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
 }
 .account_setting
 {
@@ -21,26 +27,27 @@
 .main_nav
 {
     height: calc(100vh - 80px);
-    background-color: #33353c;
-    width: 80px;
+    background-color: #122133;
+    width: 230px;
     display: inline-block;
-    overflow: hidden;
-    transition: 0.5s;
+    /* overflow: hidden;
+    transition: 0.5s; */
     font-size: 20px;
 }
-.main_nav:hover{
-    width: 300px;
-    transition: 0.5s;
-}
+/* .main_nav:hover{ */
+    /* width: 300px; */
+    /* transition: 0.5s; */
+/* } */
 .main_nav ul li
 {
-    border-radius: 5px;
+    border-radius: 0px;
     margin-bottom: 5px;
 }
 .main_nav ul li:hover 
 {
-    background-color: #29384b;
-    border-radius: 5px;
+    background-color: #6d5dd300;
+    /* background-color: #410d0d35; */
+    border-radius: 0px;
     color: white;
     font-weight: bold;
 }
@@ -49,4 +56,16 @@
 {
     display: flex;
     flex-direction: row;
+}
+
+.vl {
+    border-left: 1px solid #6d5dd336;
+}
+
+.navwithmain {
+    width: 100%;
+}
+
+.listItems {
+    font-weight: bolder;
 }
