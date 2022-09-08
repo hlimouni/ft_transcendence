@@ -59,7 +59,8 @@ a {
 }
 
 .Login form button:hover {
-  background-color: #335aac;
+  /* background-color: #335aac; */
+  background-color: #6c5dd3;
 }
 
 .loadingDiv {
@@ -84,7 +85,7 @@ a {
 }
 
 .usersDiv {
-  background-color: #212b36;
+  background-color: #18283b;
   border-radius: 12px;
   min-height: calc(100vh - 100px);
   margin: auto;
@@ -125,7 +126,8 @@ a {
 }
 body {
   /* min-width: 610px; */
-  background-color:rgb(54, 54, 54);
+  background-color: #122133;
+  /* height: 500px; */
   /* background-color: black; */
   /* background-image: url(../../files/pongbackg.jpeg); */
 }
