@@ -12,7 +12,7 @@
 {
     height: 80px;
     width: 100%;
-    background-color: #122133;
+    background-color: #0c1827;
     display: block;
     display: flex;
     justify-content: flex-end;
@@ -26,8 +26,8 @@
 }
 .main_nav
 {
-    height: calc(100vh - 80px);
-    background-color: #122133;
+    height: calc(107vh - 100px);
+    background-color: #0c1827;
     width: 230px;
     display: inline-block;
     /* overflow: hidden;
@@ -41,7 +41,7 @@
 .main_nav ul li
 {
     border-radius: 0px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 .main_nav ul li:hover 
 {
@@ -56,10 +56,11 @@
 {
     display: flex;
     flex-direction: row;
+    /* padding-top: 20px; */
 }
 
 .vl {
-    border-left: 1px solid #6d5dd336;
+    border-left: 2px solid #ffffff1c;
 }
 
 .navwithmain {

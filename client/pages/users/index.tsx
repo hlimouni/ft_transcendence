@@ -120,9 +120,10 @@ const Users = () => {
         <Loading />
       ) : (
         <div className='usersDiv'>
-          <h1 style={{ color: 'white', paddingLeft: '10px', textDecoration: 'underline' }}>
+          {/* <h1>
             Users
-          </h1>
+          </h1> */}
+          <div className="usersvl">Users</div>
           
             {state.users.length == 0 ?
             (<div className='emptyusers'>no users</div>) : 
