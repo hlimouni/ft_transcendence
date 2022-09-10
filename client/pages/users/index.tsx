@@ -12,6 +12,7 @@ const Users = () => {
   const [friendsId, setfriendsId] = useState<any[]>([])
   const [pendingRequestsIds, setPendingRequestsIds] = useState<any[]>([])
   const [blockedUsersIds, setblockedUsersIds] = useState<any[]>([])
+  const [RecievedRequests, setRecievedRequests] = useState<any[]>([])
 
   useEffect(() => {
     axios
@@ -28,11 +29,13 @@ const Users = () => {
       fetchpendingRequests()
       fetchFriends()
       fetchblockedUsersIds()
+      fetchRecievedRequests()
       state.eventsSocket.on("A_USER_STATUS_UPDATED", (user: any) => {
         fetchUsers();
         fetchFriends();
         fetchpendingRequests()
         fetchblockedUsersIds()
+        fetchRecievedRequests()
         console.log("user online data");   
       });
       state.eventsSocket.on("UPDATE_DATA", () => {
@@ -40,6 +43,7 @@ const Users = () => {
         fetchFriends();
         fetchpendingRequests()
         fetchblockedUsersIds()
+        fetchRecievedRequests()
         console.log("update data");        
       });
   
@@ -48,7 +52,7 @@ const Users = () => {
 
   async function fetchUsers() {
     try {
-        var res = await axios
+        const res = await axios
           .get(`${process.env.SERVER_HOST}/users`, { withCredentials: true })
             if (res.data.length){
                 setUsers(
@@ -66,7 +70,7 @@ const Users = () => {
 
   async function fetchFriends() {
     try {
-      var res = await axios.get(`${process.env.SERVER_HOST}/users/id/${state.mainUser.id}/friends`, {withCredentials: true})
+      const res = await axios.get(`${process.env.SERVER_HOST}/users/id/${state.mainUser.id}/friends`, {withCredentials: true})
       
         setFriends([...res.data]);
         setfriendsId([...res.data].map((e) => e.id))
@@ -76,11 +80,21 @@ const Users = () => {
     }
   }
 
+  async function fetchRecievedRequests() {
+    try {
+      const res = await axios.get(`${process.env.SERVER_HOST}/users/recievedrequests`, {withCredentials: true},)
+
+      setRecievedRequests([...res.data].map((e) => e.id));
+      console.log("recievedrequets fetched",RecievedRequests);
+    } catch (error) {
+      console.log('error');
+    }
+  }
 
   // fetchpendingIds();
   async function fetchpendingRequests() {
     try {
-      var res = await axios.get(
+      const res = await axios.get(
         `${process.env.SERVER_HOST}/users/sentrequests`,
         { withCredentials: true },
       )
@@ -97,7 +111,7 @@ const Users = () => {
 
   async function fetchblockedUsersIds() {
     try {
-      var res = await axios.get(`${process.env.SERVER_HOST}/users/blocked`, {withCredentials: true})
+      const res = await axios.get(`${process.env.SERVER_HOST}/users/blocked`, {withCredentials: true})
       if(res.data.length){
         setblockedUsersIds([...res.data].map((e) => e.id))
         console.log("blocked users fetched successfuly")
@@ -126,12 +140,12 @@ const Users = () => {
           <div className="usersvl">Users</div>
           
             {state.users.length == 0 ?
-            (<div className='emptyusers'>no users</div>) : 
+            (<div className='emptyusers'>no users found</div>) : 
             (
               <div className="condiv">
                 {state.users.map((user: any) => {
                   return (
-                    <UserCard key={user.id} {...user} pendingRequestsIds={pendingRequestsIds} friendsId={friendsId} blockedUsersIds={blockedUsersIds} />
+                    <UserCard key={user.id} {...user} pendingRequestsIds={pendingRequestsIds} friendsId={friendsId} blockedUsersIds={blockedUsersIds} RecievedRequests={RecievedRequests} />
                   )
                 })}
               </div>

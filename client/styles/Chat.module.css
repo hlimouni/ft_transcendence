@@ -42,8 +42,9 @@
 }
 .chatComponentStyle {
   /* overflow: hidden; */
-  background-color: #212b36;
+  background-color: #0c1827;
   border-radius: 12px;
+  border: 2px solid #ffffff1c;
   height: calc(85vh + 0px);
   margin: 0 auto;
   margin-top: 20px;
@@ -57,7 +58,7 @@
 .chatSideBar {
   border-radius: 30px 0 0 30px;
   width: 100%;
-  height: calc(85vh + 0px);
+  /* height: calc(85vh + 0px); */
   display: flex;
   flex-direction: column;
   padding: 20px 0 0 0;
@@ -383,10 +384,11 @@
   color: white;
   cursor: pointer;
 }
-
+/*###########################################################################*/
 .message_body {
+  background-color: #060f1a;
   width: 100%;
-  height: 100%;
+  height: 106%;
   display: grid;
   grid-template-rows: 11fr 1fr;
   padding: 20px 20px 0 20px;
@@ -420,9 +422,10 @@
 }
 
 .message_input {
+  background-color: #0c1827;
   margin-top: 40px;
-  margin-left: 20px;
-  margin-right: 20px;
+  /* margin-left: 20px;
+  margin-right: 20px; */
 }
 .message_input form {
   display: flex;
@@ -433,11 +436,11 @@
   gap: 10px;
   padding-left: 0;
   /* padding-right: 5%; */
-  border-radius: 50px;
+  /* border-radius: 50px; */
   width: 100%;
-  height: 55px;
-  background-color: #212b36;
-  border: 2px solid #0091ea;
+  /* height: 55px; */
+  background-color: #060f1a;
+  /* border: 2px solid #0091ea; */
 }
 
 .message_input form input {
