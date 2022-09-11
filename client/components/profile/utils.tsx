@@ -34,7 +34,7 @@ export async function fetchFriends(cntx: any) {
             )
             .then((res) => {
                 console.log("all users :", res.data);
-                cntx.setContacts([...res.data]);
+                cntx.setFriends([...res.data]);
             });
     } catch {
         console.log("main user state :", cntx.state.mainUser);

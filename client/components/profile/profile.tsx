@@ -18,7 +18,7 @@ export default function Profile() {
 		}
 	}, [state.mainUser]);
   return (
-    <div className={ProfileStyle.Profile}>
+    <div className={ProfileStyle.profile}>
         <Cover/>
         <MenuBar/>
         <FriendsCard/>

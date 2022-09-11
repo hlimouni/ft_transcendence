@@ -118,8 +118,9 @@ a {
   list-style-type: none;
 }
 body {
+  background-color: #1E2127;
   /* min-width: 610px; */
-  background-color:rgb(54, 54, 54);
+  /* background-color:rgb(54, 54, 54); */
   /* background-color: black; */
   /* background-image: url(../../files/pongbackg.jpeg); */
 }
@@ -146,6 +147,10 @@ body {
   background-color: black;
   transform: translateY(100%);
   transition: .2s ease-in-out;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: white;
 }
 
 .card:hover .card_Items {
