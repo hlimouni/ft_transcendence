@@ -27,7 +27,7 @@ export default function UserCard(props: any) {
   return (
     <>
     <ul className="cards">
-      <li>
+      {/* <li> */}
         <div className="card">
           <Image draggable="false" src={IMGBACK} className="card_image" />
           <div className="card_Items">
@@ -153,7 +153,7 @@ export default function UserCard(props: any) {
             </div>
           </div>
         </div>
-      </li>
+      {/* </li> */}
     </ul>
     </>
   )
