@@ -370,17 +370,17 @@ const Layout = ({ children }: { children: any }) => {
               <div className={LayoutStyle.main_content}>
                 <div className={LayoutStyle.main_nav}>
 
-                  <div
-                        style={{
-                          height: '80px',
-                          marginBottom: '70px',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                        }}
-                    >
-                        <img src="/pong.png" alt="logo" height="30px" />
-                  </div>
+                <div
+                          style={{
+                            height: '80px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            width: '200px',
+                          }}
+                      >
+                          <img src="/pong.png" alt="logo" height="30px" />
+                    </div>
 
                   <nav style={{ color: '#8f8f8f' , padding: '0px 5px' }}>
                     <List>
@@ -446,17 +446,14 @@ const Layout = ({ children }: { children: any }) => {
                 
                 <div className={LayoutStyle.navwithmain}>
                   <div className={LayoutStyle.main_header}>
-                      
-                      <div className={LayoutStyle.account_setting}>
-                        <FriendsRequestDropDown state={state} />
-                        <ProfileButton state={state} />
-                      </div>
+                    
+                    <div className={LayoutStyle.account_setting}>
+                      <FriendsRequestDropDown state={state} />
+                      <ProfileButton state={state} />
+                    </div>
                   </div>
-                  <div>
-                    <main style={{ width: '100%' }}>{children}</main>
-                  </div>
-                </div>
-                  
+                  <main style={{ width: '100%' }}>{children}</main>
+              </div>
               </div>
             </div>
           )
