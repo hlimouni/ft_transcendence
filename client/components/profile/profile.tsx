@@ -20,8 +20,10 @@ export default function Profile() {
   return (
     <div className={ProfileStyle.profile}>
         <Cover/>
+        <div className={ProfileStyle.profileBody}>
         <MenuBar/>
         <FriendsCard/>
+        </div>
     </div>
   )
 }
