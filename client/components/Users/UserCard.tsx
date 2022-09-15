@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography'
 import { User } from '../../utils/interfaces'
 import { flexbox, style } from '@mui/system'
 import IMGBACK from '../../public/backgroungUsers.jpeg'
+import JamesWebb from '../../public/james-webb.png'
 import Image from 'next/image'
 import VideogameAssetIcon from '@mui/icons-material/VideogameAsset'
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports'
@@ -29,7 +30,7 @@ export default function UserCard(props: any) {
     <ul className="cards">
       {/* <li> */}
         <div className="card">
-          <Image draggable="false" src={IMGBACK} className="card_image" />
+          <Image draggable="false" src={JamesWebb} className="card_image" />
           <div className="card_Items">
             <div className="card_header">
               <img className="card_PImg" src={`${props.image}`} />

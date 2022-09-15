@@ -90,10 +90,10 @@ a {
   border-radius: 12px;
   border: 2px solid #ffffff1c;
   min-height: calc(50vh - 100px);
-  margin: auto;
+  margin: 10px;
   /* margin-left: 50px; */
   margin-top: 20px;
-  width: 70%;
+  width: auto;
   align-items: center;
   justify-content: center;
   
@@ -118,23 +118,28 @@ a {
   /* display: grid; */
   /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
   /* grid-template-columns: 300px 300px 300px 300px; */
-  padding: 50px;
-  display: flex;
-  gap: 20px;
-  flex-direction: row;
-  flex-wrap: wrap;
+  padding: 30px;
+  /* display: flex; */
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+  grid-gap: 2rem;
+  /* border-radius: 20px; */
+  /* gap: 20px; */
+  /* flex-direction: row; */
+  /* flex-wrap: wrap; */
+  /* width: 500px; */
 }
 @media screen and (max-width: 1094px) {
   .condiv{
     /* display: grid; */
     /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
     /* grid-template-columns: 300px 300px 300px 300px; */
-    padding: 50px;
+    /* padding: 50px;
     display: flex;
     gap: 20px;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: center; */
   }
 }
 .cards {
@@ -142,6 +147,8 @@ a {
   display: flex;
   justify-content: center;
   list-style-type: none;
+  border-radius: 20px;
+
 }
 body {
   /* min-width: 610px; */
@@ -158,13 +165,15 @@ body {
   width: 250px;
   height: 220px;
   border-radius: 20px;
-  overflow: hidden;
+  /* overflow: hidden; */
+  /* margin-bottom: 100px; */
   text-decoration: none;
 }
 
 .card_image {
   width: 100%;
-  height: auto;
+  /* height: auto; */
+  border-radius: 20px;
 }
 
 .card_Items {
@@ -173,12 +182,13 @@ body {
   left: 0;
   right: 0;
   background-color: black;
-  transform: translateY(100%);
-  transition: .2s ease-in-out;
+  /* transform: translateY(100%);
+  transition: .2s ease-in-out; */
+  border-radius: 20px;
 }
 
 .card:hover .card_Items {
-  transform: translateY(0);
+  /* transform: translateY(0); */
 }
 
 .card_header {
@@ -188,12 +198,13 @@ body {
   gap: 2em;
   padding: 1em;
   background-color: black;
-  transform: translateY(-100%);
-  transition: .2s ease-in-out;
+  /* border-radius: 20px; */
+  /* transform: translateY(-100%);
+  transition: .2s ease-in-out; */
 }
 
 .card:hover .card_header {
-  transform: translateY(0);
+  /* transform: translateY(0); */
 }
 
 .card_PImg {
@@ -220,6 +231,7 @@ body {
   margin: 0;
   background-color: black;
   overflow: hidden;
+  border-radius: 20px;
 }
 
 .cancelRqstBtn {
