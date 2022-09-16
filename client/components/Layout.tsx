@@ -367,10 +367,8 @@ const Layout = ({ children }: { children: any }) => {
           return (
             <div className={LayoutStyle.layout}>
               
-              <div className={LayoutStyle.main_content}>
-                <div className={LayoutStyle.main_nav}>
-
-                <div
+              <div className={LayoutStyle.main_header}>
+                      <div
                           style={{
                             height: '80px',
                             display: 'flex',
@@ -381,6 +379,79 @@ const Layout = ({ children }: { children: any }) => {
                       >
                           <img src="/pong.png" alt="logo" height="30px" />
                     </div>
+                    <div className={LayoutStyle.account_setting}>
+                      {/* */}
+                      <List className={LayoutStyle.itemsUl}>
+                      {sideMenu.map((page, index) => {
+                        if (page.selected) {
+                          return (
+                            <Link href={page.path} key={index}>
+                              <a href="">
+                                <ListItem
+                                  disablePadding
+                                  sx={{
+                                    display: 'flex',
+                                    // borderBottom: '3px solid #6c5dd3',
+                                    backgroundColor: '#2d090935 !important',
+                                    // background: 'linear-gradient(90deg, rgba(108,93,211,0.5914959733893557) 0%, rgba(108,93,211,0) 100%, rgba(0,212,255,0) 100%)',
+                                    color: '#ebebeb',
+                                    borderRadius: '50px',
+                                    maxWidth:'55px',
+                                  }}
+                                >
+                                  <ListItemButton
+                                    sx={{
+                                      // padding: '20px',
+                                      borderRadius: '50px',
+                                      height: '60px',
+                                      
+                                    }}
+                                  >
+                                    <ListItemIcon sx={{color:'#6c5dd3'}} >{page.icon}</ListItemIcon>
+                                    {/* <ListItemText className={LayoutStyle.listItems}>{page.name}</ListItemText> */}
+                                  </ListItemButton>
+                                </ListItem>
+                              </a>
+                            </Link>
+                          )
+                        } else {
+                          return (
+                            <Link href={page.path} key={index}>
+                              <a href="">
+                                <ListItem
+                                  disablePadding
+                                  sx={{
+                                    borderRadius: '50px',
+                                    maxWidth:'55px',
+                                  }}
+                                >
+                                  <ListItemButton
+                                    sx={{
+                                      // padding: '20px',
+                                      borderRadius: '50px',
+                                      height: '60px',
+                                    }}
+                                  >
+                                    <ListItemIcon>{page.icon}</ListItemIcon>
+                                    {/* <ListItemText className={LayoutStyle.listItems}>{page.name}</ListItemText> */}
+                                  </ListItemButton>
+                                </ListItem>
+                              </a>
+                            </Link>
+                          )
+                        }
+                      })}
+                      <FriendsRequestDropDown state={state} />
+                    </List>
+                      {/* */}
+                    </div>
+                      <ProfileButton state={state} />
+                  </div>
+
+              <div className={LayoutStyle.main_content}>
+                <div className={LayoutStyle.main_nav}>
+
+                
 
                   <nav style={{ color: '#8f8f8f' , padding: '0px 5px' }}>
                     <List>
@@ -444,16 +515,7 @@ const Layout = ({ children }: { children: any }) => {
                 </div>
                 <div className={LayoutStyle.vl}></div>
                 
-                <div className={LayoutStyle.navwithmain}>
-                  <div className={LayoutStyle.main_header}>
-                    
-                    <div className={LayoutStyle.account_setting}>
-                      <FriendsRequestDropDown state={state} />
-                      <ProfileButton state={state} />
-                    </div>
-                  </div>
                   <main style={{ width: '100%' }}>{children}</main>
-              </div>
               </div>
             </div>
           )
