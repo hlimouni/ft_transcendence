@@ -21,8 +21,8 @@ export default function Profile() {
     <div className={ProfileStyle.profile}>
         <Cover/>
         <div className={ProfileStyle.profileBody}>
-        <MenuBar/>
-        <FriendsCard/>
+          <MenuBar/>
+          <FriendsCard/>
         </div>
     </div>
   )

@@ -4,6 +4,22 @@
     box-sizing: border-box;
 }
 
+.modal_title {
+    padding: .7em .9em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.modal_avatar {
+    padding: 1em 0;
+    display: flex;
+    flex-direction: row;
+    gap: 6rem;
+    justify-content: space-between;
+    padding-bottom: 0;
+}
+
 .profile {
     background-color: #1E2127;
     display: inline;
