@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsNumber, IsString, IsUUID } from 'class-validator';
 
-export class AddGameDto {
+export class createGame {
   @IsUUID()
   @IsNotEmpty()
   id: string;
