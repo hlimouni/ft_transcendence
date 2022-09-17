@@ -26,6 +26,12 @@ a {
   }
 }
 
+.errorpage {
+  background-color: #131e2bfd;
+  
+  height: 100%;
+}
+
 .Login {
   width: 100%;
   height: 100px;
