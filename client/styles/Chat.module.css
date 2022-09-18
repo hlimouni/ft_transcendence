@@ -44,7 +44,8 @@
   /* overflow: hidden; */
   background-color: #0c1827;
   border-radius: 12px;
-  border: 2px solid #ffffff1c;
+  /* border: 2px solid #ffffff1c; */
+  box-shadow: -5px 2px 18px 4px #20272f;
   height: calc(85vh + 0px);
   margin: 0 auto;
   margin-top: 20px;
@@ -52,7 +53,7 @@
   grid-template-columns: 2fr 5fr;
   color: #d0d6dc;
   overflow: hidden;
-  width: 70%;
+  width: 92%;
 }
 
 .chatSideBar {
@@ -748,7 +749,7 @@
     margin-right: 100px;
   }
 }
-@media (max-width: 900px)
+@media (max-width: 780px)
 {
 
 	.chatComponentStyle {
