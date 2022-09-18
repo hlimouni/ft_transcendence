@@ -52,6 +52,8 @@ import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import HouseOutlinedIcon from '@mui/icons-material/HouseOutlined';
 import UserIcon from '../public/customer.png'
+import MainCard from './MainCard'
+
 
 
 
@@ -204,7 +206,7 @@ const FriendsRequestDropDown = ({ state }: { state: any }) => {
             }}
           >
             <BottomNavigation showLabels sx={{ backgroundColor: '#0c1827', color: '#ebebeb'}}>
-              <BottomNavigationAction sx={{width:'50px', backgroundColor: '#0c1827', color: '#ebebeb'}}icon={
+              <BottomNavigationAction sx={{width:'50px', backgroundColor: '#0c1827', color: '#ebebeb', "&:hover":{ color: '#6c5dd3',},"&:active":{ color: '#6c5dd3' },}}icon={
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-supported-dps="24x24" fill="currentColor" className="mercado-match" width="24" height="24" focusable="false">
                 <path d="M22 19h-8.28a2 2 0 11-3.44 0H2v-1a4.52 4.52 0 011.17-2.83l1-1.17h15.7l1 1.17A4.42 4.42 0 0122 18zM18.21 7.44A6.27 6.27 0 0012 2a6.27 6.27 0 00-6.21 5.44L5 13h14z"></path>
               </svg>
@@ -420,8 +422,8 @@ const Layout = ({ children }: { children: any }) => {
                               <Link href={page.path} key={index}>
                                 <a href="">
                                       {/* <ListItemIcon sx={{color:'#6c5dd3'}} >{page.icon}</ListItemIcon> */}
-                                      <BottomNavigation showLabels>
-                                        <BottomNavigationAction sx={{ backgroundColor: '#0c1827', color:'#6c5dd3' }} icon={page.icon} />
+                                      <BottomNavigation showLabels sx={{ backgroundColor: '#0c1827', color: '#ebebeb'}}>
+                                        <BottomNavigationAction sx={{ backgroundColor: '#0c1827', color:'#6c5dd3', borderRadius:'50px' }} icon={page.icon} />
                                       </BottomNavigation>
                                       
                                 </a>
@@ -435,11 +437,10 @@ const Layout = ({ children }: { children: any }) => {
                                 <a href="">
                                       {/* <ListItemIcon>{page.icon}</ListItemIcon> */}
                                       <BottomNavigation showLabels sx={{ backgroundColor: '#0c1827', color: '#ebebeb'}}>
-                                        <BottomNavigationAction sx={{width:'', backgroundColor: '#0c1827', color: '#ebebeb'}} icon={page.icon} />
+                                        <BottomNavigationAction sx={{width:'50px', backgroundColor: '#0c1827', color: '#ebebeb', borderRadius:'50px'}} icon={page.icon} />
                                       </BottomNavigation>
                                 </a>
                               </Link>
-                              
                             )
                           }
                         })}
@@ -448,15 +449,54 @@ const Layout = ({ children }: { children: any }) => {
                       </List>
                       {/* */}
                     </div>
-                      <ProfileButton state={state} />
-                  </div>
+                    <div className={LayoutStyle.NotifMobile}>
+                      <div className={LayoutStyle.NotifBtnMobile}>
+                        <FriendsRequestDropDown state={state} />
+                      </div>
+                        <ProfileButton state={state} />
+                    </div>
+              </div>
 
               <div className={LayoutStyle.main_content}>
+                
                 <div className={LayoutStyle.main_nav}>
 
-                
+                  {/* */}
+                  <nav style={{ color: '#8f8f8f' , padding: '0px 5px' }}>
+                    <List className={LayoutStyle.itemsUlMobile}>
+                      {sideMenu.map((page, index) => {
+                        if (page.selected) {
+                          return (
+                            <Link href={page.path} key={index}>
+                              <a href="">
+                                <BottomNavigation showLabels sx={{ backgroundColor: '#0c1827', color: '#ebebeb'}}>
+                                  <BottomNavigationAction sx={{ backgroundColor: '#0c1827', color:'#6c5dd3', borderRadius:'50px' }} icon={page.icon} />
+                                </BottomNavigation>
+                              </a>
+                            </Link>
+                          )
+                        } else {
+                          return (
+                            <Link href={page.path} key={index}>
+                              <a href="">
+                                <BottomNavigation showLabels sx={{ backgroundColor: '#0c1827', color: '#ebebeb'}}>
+                                  <BottomNavigationAction sx={{width:'50px', backgroundColor: '#0c1827', color: '#ebebeb', borderRadius:'50px'}} icon={page.icon} />
+                                </BottomNavigation>
+                              </a>
+                            </Link>
+                          )
+                        }
+                      })}
+                    </List>
+                  </nav>
+                  {/* */}
 
                   
+                </div>
+                <div className={LayoutStyle.ProfileCard}>
+
+                <MainCard state={state} />
+
                 </div>
                 <div className={LayoutStyle.vl}></div>
                 

@@ -94,12 +94,13 @@ a {
 .usersDiv {
   background-color: #0c1827;
   border-radius: 12px;
-  border: 2px solid #ffffff1c;
+  /* border: 2px solid #ffffff1c; */
+  box-shadow: -5px 2px 18px 4px #20272f;
   min-height: calc(50vh - 100px);
-  margin: 10px;
+  margin: 0 auto;
   /* margin-left: 50px; */
   margin-top: 20px;
-  width: auto;
+  width: 92%;
   align-items: center;
   justify-content: center;
   
@@ -114,10 +115,10 @@ a {
 .usersvl {
   color: white;
   font-size: xx-large;
-  margin-left: 40px;
+  margin-left: 30px;
   margin-top: 10px;
   width: 100px;
-  border-bottom: 2px solid #ffffff44;
+  /* border-bottom: 2px solid #ffffff44; */
 }
 
 .condiv{
@@ -136,13 +137,17 @@ a {
   /* width: 500px; */
 }
 
-@media (min-width: 780px) {
+@media (min-width: 900px) {
   .condiv{
     grid-template-columns: repeat(2,minmax(0px,1fr));
   }
+  .usersDiv {
+    width: 92%;
+  }
+
 }
 
-@media (min-width: 1028px) {
+@media (min-width: 1200px) {
   .condiv{
     grid-template-columns: repeat(3,minmax(0px,1fr));
     /* display: grid; */
@@ -157,33 +162,33 @@ a {
   }
 }
 
-@media (min-width: 1310px) {
+@media (min-width: 1580px) {
   .condiv{
     grid-template-columns: repeat(4,minmax(0px,1fr));
   }
 }
 
-@media (min-width: 1580px) {
+@media (min-width: 2000px) {
   .condiv{
     grid-template-columns: repeat(5,minmax(0px,1fr));
   }
 }
 
-@media (min-width: 1810px) {
+/* @media (min-width: 1810px) {
   .condiv{
     grid-template-columns: repeat(6,minmax(0px,1fr));
   }
-}
+} */
 
-@media (min-width: 2110px) {
+/* @media (min-width: 2110px) {
   .condiv{
     grid-template-columns: repeat(7,minmax(0px,1fr));
   }
-}
+} */
 
 @media (min-width: 2400px) {
   .condiv{
-    grid-template-columns: repeat(8,minmax(0px,1fr));
+    grid-template-columns: repeat(6,minmax(0px,1fr));
   }
 }
 
