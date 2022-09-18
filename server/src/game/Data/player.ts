@@ -1,6 +1,6 @@
 import { Socket } from 'socket.io';
 import { Paddle } from './paddle';
-import { GameVariable } from './constant';
+import { GameData } from './constant';
 
 export class Player {
   private _socket: Socket;
@@ -26,9 +26,9 @@ export class Player {
     this.username = username;
     this._avatar = avatar;
     if (isLeftSide) {
-      this._paddle = new Paddle(GameVariable._left_Paddle_X);
+      this._paddle = new Paddle(GameData.leftpadd_x);
     } else {
-      this._paddle = new Paddle(GameVariable._right_Paddle_X);
+      this._paddle = new Paddle(GameData.rightpadd_x);
     }
     this._isInterval = setInterval(() => {
       this._paddle.movePaddle();
@@ -36,13 +36,13 @@ export class Player {
   }
 
   public checkWin(): boolean {
-    if (this._score === GameVariable._max_Score) return true;
+    if (this._score === GameData.max_score) return true;
     return false;
   }
   public stopPaddle(): void {
     clearInterval(this._isInterval);
     this._paddle.set_PaddleY(
-      GameVariable._canvas_Height / 2 - GameVariable._paddle_Height / 2,
+      GameData.cHeight / 2 - GameData.padd_h / 2,
     );
   }
   public getSocket(): Socket {
