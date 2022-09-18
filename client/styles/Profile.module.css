@@ -119,9 +119,25 @@
 
 .coverImage {
     object-fit: cover;
-    /* filter: brightness(40%);
-    opacity: .9; */
     width: 100vw;
     height: 26rem;
-    /* overflow: hidden; */
+}
+
+.winStats {
+    width: 25rem;
+    height: 25rem;
+    padding: 3rem;
+    margin: 1.5rem 0;
+    background-color: #242731;
+    border-radius: 1.3em;
+}
+
+.scores {
+    background-color: #242731;
+    /* background-color: #3F8CFF; */
+    padding: 3rem;
+    margin: 1.5rem 0;
+    width: 40rem;
+    height: 25rem;
+    border-radius: 1.5rem;
 }
