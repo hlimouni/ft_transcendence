@@ -148,7 +148,7 @@
 
 .cardsL {
     width: 300px;
-    height: 460px;
+    /* height: 460px; */
     padding: 0px;
     border-radius: 20px;
     box-shadow: -5px 2px 18px 4px #20272f;
@@ -166,18 +166,28 @@
   
   .card_imageL {
     width: 100%;
-    border-radius: 20px;
+    opacity: 0.5;
+    /* border-radius: 20px; */
   }
   
+.card_contentL1{
+    /* position: relative;
+    top: -50px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
   .card_ItemsL {
-    /* position: relative; */
+    position: relative;
+    top: -70px;
     bottom: 0;
     left: 0;
     right: 0;
-    /* top: -30px; */
     /* background-color: black; */
     display: flex;
-    align-items: center;
+    align-items:flex-end;
     justify-content: center; 
     border-radius: 20px;
     
@@ -185,26 +195,28 @@
   
 
   .card_PImgL {
-    /* position: relative; */
-    /* top: -50px; */
+    /* position: relative;
+    top: -50px; */
     flex-shrink: 0;
-    width: 200px;
-    height: 200px; 
+    width: 150px;
+    height: 150px;
     border-radius: 50%;      
   }
 
 .cardContent {
+    position: relative;
+    top: -30px;
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
 }
   
   .card_headerL {
-    /* position: relative; */
+    position: relative;
     display: flex;
     justify-content: center; 
-    /* top: -50px; */
+    top: -40px;
     /* background-color: #0c1827; */
     align-items: center; 
     flex-direction: column;
@@ -213,11 +225,14 @@
   }
   
   .card_titleL {
-    margin: 0 0 .3em;
-    margin-bottom: 30px;
-    color :rgb(171, 171, 171);
+    margin: 0;
+    /* margin-bottom: 30px; */
+    color :rgb(240, 240, 240);
   }
-  
+  .card_User {
+      margin: 0;
+      color: rgb(171, 171, 171)  ;
+  }
   
 .card_btnsL {
     justify-content: center;
@@ -226,7 +241,7 @@
 
 .card_btnsL button {
     width: 250px;
-    margin-top: 20px;
+    margin-top: 30px;
   }
 .card_btnsL button:hover {
     color: rgb(180, 180, 180);

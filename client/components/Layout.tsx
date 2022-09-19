@@ -55,8 +55,6 @@ import UserIcon from '../public/customer.png'
 import MainCard from './MainCard'
 
 
-
-
 const ProfileButton = ({ state }: { state: any }) => {
   const settings = [
     { text: 'Profile', icon: <PersonIcon /> },
