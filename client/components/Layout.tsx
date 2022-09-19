@@ -20,6 +20,13 @@ import {
 import SettingsIcon from '@mui/icons-material/Settings'
 import LogoutIcon from '@mui/icons-material/Logout'
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import TextsmsOutlinedIcon from '@mui/icons-material/TextsmsOutlined';
+import SportsEsportsOutlinedIcon from '@mui/icons-material/SportsEsportsOutlined';
+import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
+import PlayCircleOutlinedIcon from '@mui/icons-material/PlayCircleOutlined';
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { User } from '../utils/interfaces'
@@ -40,6 +47,13 @@ import LayoutStyle from '../styles/Layout.module.css'
 import Link from 'next/link'
 import { acceptFriendRequest, unfriend } from '../utils/utils'
 import { useRouter } from 'next/router'
+
+import BottomNavigation from '@mui/material/BottomNavigation';
+import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import HouseOutlinedIcon from '@mui/icons-material/HouseOutlined';
+import UserIcon from '../public/customer.png'
+import MainCard from './MainCard'
+
 
 const ProfileButton = ({ state }: { state: any }) => {
   const settings = [
@@ -179,11 +193,24 @@ const FriendsRequestDropDown = ({ state }: { state: any }) => {
             sx={{
               width: '50px',
               height: '50px',
-              color: 'white',
+              color: '#ebebeb',
               backgroundColor: 'rgba(0,0,0,0)',
+              "&:hover":{
+                color: '#6c5dd3',
+              },
+              "&:active":{
+                color: '#6c5dd3',
+              },
             }}
           >
-            <PeopleAltIcon />
+            <BottomNavigation showLabels sx={{ backgroundColor: '#0c1827', color: '#ebebeb'}}>
+              <BottomNavigationAction sx={{width:'50px', backgroundColor: '#0c1827', color: '#ebebeb', "&:hover":{ color: '#6c5dd3',},"&:active":{ color: '#6c5dd3' },}}icon={
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-supported-dps="24x24" fill="currentColor" className="mercado-match" width="24" height="24" focusable="false">
+                <path d="M22 19h-8.28a2 2 0 11-3.44 0H2v-1a4.52 4.52 0 011.17-2.83l1-1.17h15.7l1 1.17A4.42 4.42 0 0122 18zM18.21 7.44A6.27 6.27 0 0012 2a6.27 6.27 0 00-6.21 5.44L5 13h14z"></path>
+              </svg>
+              } />
+              </BottomNavigation>
+            
           </Avatar>
         </Badge>
       </IconButton>
@@ -314,19 +341,23 @@ const Layout = ({ children }: { children: any }) => {
   const pages = [
     {
       name: 'Profile',
-      icon: <PersonRoundedIcon/>,
+      icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-supported-dps="24x24" fill="currentColor" className="mercado-match" width="24" height="24" focusable="false">
+      <path d="M23 9v2h-2v7a3 3 0 01-3 3h-4v-6h-4v6H6a3 3 0 01-3-3v-7H1V9l11-7 5 3.18V2h3v5.09z"></path>
+    </svg>,
       path: '/',
       selected: true,
     },
     {
       name: 'Chat',
-      icon: <MarkChatUnreadRoundedIcon />,
+      icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" data-supported-dps="24x24" fill="currentColor" className="mercado-match" width="24" height="24" focusable="false">
+      <path d="M16 4H8a7 7 0 000 14h4v4l8.16-5.39A6.78 6.78 0 0023 11a7 7 0 00-7-7zm-8 8.25A1.25 1.25 0 119.25 11 1.25 1.25 0 018 12.25zm4 0A1.25 1.25 0 1113.25 11 1.25 1.25 0 0112 12.25zm4 0A1.25 1.25 0 1117.25 11 1.25 1.25 0 0116 12.25z"></path>
+    </svg>,
       path: '/chat',
       selected: false,
     },
     {
       name: 'Users',
-      icon: <GroupIcon />,
+      icon: <PeopleAltIcon />,
       path: '/users',
       selected: false,
     },
@@ -338,7 +369,7 @@ const Layout = ({ children }: { children: any }) => {
     },
     {
       name: 'Live',
-      icon: <OndemandVideoRoundedIcon />,
+      icon: <PlayCircleOutlinedIcon />,
       path: '/live',
       selected: false,
     },
@@ -367,10 +398,8 @@ const Layout = ({ children }: { children: any }) => {
           return (
             <div className={LayoutStyle.layout}>
               
-              <div className={LayoutStyle.main_content}>
-                <div className={LayoutStyle.main_nav}>
-
-                <div
+              <div className={LayoutStyle.main_header}>
+                      <div
                           style={{
                             height: '80px',
                             display: 'flex',
@@ -381,35 +410,66 @@ const Layout = ({ children }: { children: any }) => {
                       >
                           <img src="/pong.png" alt="logo" height="30px" />
                     </div>
+                    <div className={LayoutStyle.account_setting}>
+                      {/* */}
+                      <List className={LayoutStyle.itemsUl}>
+                        {sideMenu.map((page, index) => {
+                          if (page.selected) {
+                            return (
+                              
+                              <Link href={page.path} key={index}>
+                                <a href="">
+                                      {/* <ListItemIcon sx={{color:'#6c5dd3'}} >{page.icon}</ListItemIcon> */}
+                                      <BottomNavigation showLabels sx={{ backgroundColor: '#0c1827', color: '#ebebeb'}}>
+                                        <BottomNavigationAction sx={{ backgroundColor: '#0c1827', color:'#6c5dd3', borderRadius:'50px' }} icon={page.icon} />
+                                      </BottomNavigation>
+                                      
+                                </a>
+                              </Link>
+                              
+                            )
+                          } else {
+                            return (
+                              
+                              <Link href={page.path} key={index}>
+                                <a href="">
+                                      {/* <ListItemIcon>{page.icon}</ListItemIcon> */}
+                                      <BottomNavigation showLabels sx={{ backgroundColor: '#0c1827', color: '#ebebeb'}}>
+                                        <BottomNavigationAction sx={{width:'50px', backgroundColor: '#0c1827', color: '#ebebeb', borderRadius:'50px'}} icon={page.icon} />
+                                      </BottomNavigation>
+                                </a>
+                              </Link>
+                            )
+                          }
+                        })}
+                        <FriendsRequestDropDown state={state} />
+                        
+                      </List>
+                      {/* */}
+                    </div>
+                    <div className={LayoutStyle.NotifMobile}>
+                      <div className={LayoutStyle.NotifBtnMobile}>
+                        <FriendsRequestDropDown state={state} />
+                      </div>
+                        <ProfileButton state={state} />
+                    </div>
+              </div>
 
+              <div className={LayoutStyle.main_content}>
+                
+                <div className={LayoutStyle.main_nav}>
+
+                  {/* */}
                   <nav style={{ color: '#8f8f8f' , padding: '0px 5px' }}>
-                    <List>
+                    <List className={LayoutStyle.itemsUlMobile}>
                       {sideMenu.map((page, index) => {
                         if (page.selected) {
                           return (
                             <Link href={page.path} key={index}>
                               <a href="">
-                                <ListItem
-                                  disablePadding
-                                  sx={{
-                                    borderLeft: '3px solid #6c5dd3',
-                                    backgroundColor: '#2d090935 !important',
-                                    // background: 'linear-gradient(90deg, rgba(108,93,211,0.5914959733893557) 0%, rgba(108,93,211,0) 100%, rgba(0,212,255,0) 100%)',
-                                    color: '#ebebeb',
-                                    borderRadius: '0px',
-                                  }}
-                                >
-                                  <ListItemButton
-                                    sx={{
-                                      padding: '20px',
-                                      borderRadius: '0px',
-                                      height: '60px',
-                                    }}
-                                  >
-                                    <ListItemIcon >{page.icon}</ListItemIcon>
-                                    <ListItemText className={LayoutStyle.listItems}>{page.name}</ListItemText>
-                                  </ListItemButton>
-                                </ListItem>
+                                <BottomNavigation showLabels sx={{ backgroundColor: '#0c1827', color: '#ebebeb'}}>
+                                  <BottomNavigationAction sx={{ backgroundColor: '#0c1827', color:'#6c5dd3', borderRadius:'50px' }} icon={page.icon} />
+                                </BottomNavigation>
                               </a>
                             </Link>
                           )
@@ -417,23 +477,9 @@ const Layout = ({ children }: { children: any }) => {
                           return (
                             <Link href={page.path} key={index}>
                               <a href="">
-                                <ListItem
-                                  disablePadding
-                                  sx={{
-                                    borderRadius: '0px',
-                                  }}
-                                >
-                                  <ListItemButton
-                                    sx={{
-                                      padding: '20px',
-                                      borderRadius: '0px',
-                                      height: '60px',
-                                    }}
-                                  >
-                                    <ListItemIcon>{page.icon}</ListItemIcon>
-                                    <ListItemText className={LayoutStyle.listItems}>{page.name}</ListItemText>
-                                  </ListItemButton>
-                                </ListItem>
+                                <BottomNavigation showLabels sx={{ backgroundColor: '#0c1827', color: '#ebebeb'}}>
+                                  <BottomNavigationAction sx={{width:'50px', backgroundColor: '#0c1827', color: '#ebebeb', borderRadius:'50px'}} icon={page.icon} />
+                                </BottomNavigation>
                               </a>
                             </Link>
                           )
@@ -441,19 +487,18 @@ const Layout = ({ children }: { children: any }) => {
                       })}
                     </List>
                   </nav>
+                  {/* */}
+
+                  
+                </div>
+                <div className={LayoutStyle.ProfileCard}>
+
+                <MainCard state={state} />
+
                 </div>
                 <div className={LayoutStyle.vl}></div>
                 
-                <div className={LayoutStyle.navwithmain}>
-                  <div className={LayoutStyle.main_header}>
-                    
-                    <div className={LayoutStyle.account_setting}>
-                      <FriendsRequestDropDown state={state} />
-                      <ProfileButton state={state} />
-                    </div>
-                  </div>
                   <main style={{ width: '100%' }}>{children}</main>
-              </div>
               </div>
             </div>
           )

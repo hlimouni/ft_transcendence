@@ -8,7 +8,9 @@ import Typography from '@mui/material/Typography'
 import { User } from '../../utils/interfaces'
 import { flexbox, style } from '@mui/system'
 import IMGBACK from '../../public/backgroungUsers.jpeg'
+import JamesWebb from '../../public/james-webb.png'
 import Image from 'next/image'
+import PP from '../../public/p_prUsers.jpeg'
 import VideogameAssetIcon from '@mui/icons-material/VideogameAsset'
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports'
 import Grid from '@mui/material/Grid'
@@ -19,6 +21,7 @@ import axios from 'axios'
 import PersonRemoveAlt1Icon from '@mui/icons-material/PersonRemoveAlt1'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
 import DoneIcon from '@mui/icons-material/Done'
+import BACKGROUND4x from '../../public/BACKGROUND4x.png'
 
 export default function UserCard(props: any) {
   const { state, setUsers, setMainUser, } = useContext(AppContext)
@@ -27,9 +30,9 @@ export default function UserCard(props: any) {
   return (
     <>
     <ul className="cards">
-      {/* <li> */}
+      <li>
         <div className="card">
-          <Image draggable="false" src={IMGBACK} className="card_image" />
+          <Image draggable="false" src={PP} className="card_image" />
           <div className="card_Items">
             <div className="card_header">
               <img className="card_PImg" src={`${props.image}`} />
@@ -153,7 +156,7 @@ export default function UserCard(props: any) {
             </div>
           </div>
         </div>
-      {/* </li> */}
+      </li>
     </ul>
     </>
   )
