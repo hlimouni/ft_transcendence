@@ -16,8 +16,8 @@ export default function Profile() {
 	}, [state.mainUser]);
   return (
     <div>
-        <Cover/>
-        {/* <MenuBar/> */}
+        {/* <Cover/> */}
+        <MenuBar/>
     </div>
   )
 }
