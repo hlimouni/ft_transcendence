@@ -22,6 +22,13 @@ ChartJS.register(
 
 export const options = {
   responsive: true,
+  scales: {
+    y: {
+        ticks: {
+            precision: 0,
+        }
+    }
+  },
   plugins: {
     legend: {
       position: 'top' as const,
@@ -39,6 +46,8 @@ export const data = {
   labels,
   datasets: [
     {
+      hoverBackgroundColor: 'rgba(108, 93, 211, .4)',
+      hoverBorderColor: 'rgba(108, 93, 211, 1)',
       label: 'Score',
       data: {'Game 1': 2, 'Game 2': 2, 'Game 3': 5, 'Game 4': 1, 'Game 5 (Last)': 5},
       backgroundColor: 'rgba(76, 77, 84, .5)',
