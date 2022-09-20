@@ -67,10 +67,6 @@
     height: 33rem;
 }
 
-.editButton {
-    margin-right: 0;
-}
-
 .profileText {
     padding: .5em;
     font-size: 1.5em;
@@ -83,8 +79,9 @@
 }
 
 .profileBanner {
-    padding: 3rem 2em;
+    /* filter: drop-shadow(.06rem .06rem 1rem hsl(224, 15%, 8%)); */
     display: flex;
+    padding: 3rem 2em;
     /* flex-wrap: wrap; */
     border-radius: 1.5rem;
     flex-direction: row;
@@ -97,6 +94,16 @@
     margin: 0 auto;
     transform: translate(0, -7rem);
 }
+
+
+.editButton {
+    letter-spacing: .12em;
+    white-space: nowrap;
+    margin: 2.2rem;
+    margin-right: 0;
+    padding: 2em 3em;
+}
+
 
 .friends {
     display: grid;
@@ -124,16 +131,18 @@
 }
 
 .winStats {
+    background-color: #242731;
+    /* filter: drop-shadow(.02rem .02rem .3rem hsl(224, 15%, 10%)); */
     width: 25rem;
     height: 25rem;
     padding: 3rem;
     margin: 1.5rem 0;
-    background-color: #242731;
     border-radius: 1.3em;
 }
 
 .scores {
     background-color: #242731;
+    /* filter: drop-shadow(.02rem .02rem .3rem hsl(224, 15%, 10%)); */
     /* background-color: #3F8CFF; */
     padding: 3rem;
     margin: 1.5rem 0;

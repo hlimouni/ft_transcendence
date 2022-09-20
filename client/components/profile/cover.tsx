@@ -38,13 +38,7 @@ const Cover = () => {
             onClick={handleClickOpen}
             className={ProfileStyle.editButton}
             startIcon={<EditIcon/>}
-            variant='contained'
-            sx={{
-              letterSpacing: '.12em',
-              whiteSpace: 'nowrap',
-              margin: '2.2rem',
-              padding: '2em 3em'
-              }}>
+            variant='contained'>
                 Edit Profile
           </Button>
           <EditDialog openState={open} closeHandler={handleClose}/>
