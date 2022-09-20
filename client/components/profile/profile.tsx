@@ -8,6 +8,7 @@ import { fetchFriends } from './utils'
 import ProfileStyle from '../../styles/Profile.module.css'
 import { WinStats } from './winStat'
 import { ScoreStats } from './scoreStat'
+import FriendsInfo from './friendsInof'
 
 export default function Profile() {
   const {state} = useContext(AppContext);
@@ -25,10 +26,11 @@ export default function Profile() {
         <div className={ProfileStyle.profileBody}>
           <MenuBar/>
           {/* <FriendsCard/> */}
-          <div style={{display: 'flex', maxWidth: '76rem', justifyContent: 'space-evenly'}}>
+          {/* <div style={{display: 'flex', maxWidth: '76rem', justifyContent: 'space-evenly'}}>
             <WinStats/>
             <ScoreStats/>
-          </div>
+          </div> */}
+          {/* <FriendsInfo/> */}
         </div>
     </div>
   )
