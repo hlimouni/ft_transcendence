@@ -132,12 +132,16 @@
 
 .winStats {
     background-color: #242731;
-    /* filter: drop-shadow(.02rem .02rem .3rem hsl(224, 15%, 10%)); */
     width: 25rem;
     height: 25rem;
     padding: 3rem;
     margin: 1.5rem 0;
     border-radius: 1.3em;
+    margin-top: 0;
+}
+
+.winStats:hover {
+    filter: drop-shadow(.02rem .02rem 1rem hsl(224, 15%, 10%));
 }
 
 .scores {
@@ -146,7 +150,12 @@
     /* background-color: #3F8CFF; */
     padding: 3rem;
     margin: 1.5rem 0;
-    width: 40rem;
+    width: 45rem;
     height: 25rem;
     border-radius: 1.5rem;
+    margin-top: 0;
+}
+
+.scores:hover {
+    filter: drop-shadow(.02rem .02rem 1rem hsl(224, 15%, 10%));
 }
