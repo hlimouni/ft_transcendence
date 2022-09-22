@@ -343,3 +343,15 @@ body {
           opacity: 1;
         }
 }
+
+.TwoFa {
+  background-color: #20272f;
+  width: 250px;
+  height: 300px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+}
