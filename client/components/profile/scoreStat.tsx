@@ -55,6 +55,6 @@ export const data = {
   ],
 };
 
-export function ScoreStats() {
+export function ScoreStats(props: any) {
   return <div className={ProfileStyle.scores}><Bar options={options} data={data} /></div>;
 }
