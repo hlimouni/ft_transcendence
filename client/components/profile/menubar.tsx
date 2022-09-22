@@ -10,6 +10,7 @@ const MenuBar = (props: Props) => {
             <li><a href='#'>Profile</a></li>
             <li><a href='#'>Friends</a></li>
             <li><a href='#'>History</a></li>
+            
         </ul>
     </div>
   )
