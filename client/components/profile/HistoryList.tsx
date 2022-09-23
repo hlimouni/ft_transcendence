@@ -2,12 +2,13 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/AppContext";
 import HistoryCard from "./HistoryCard";
+import HistoryGame from "./HistoryGame";
 import { WinStats } from "./winStat";
 
 const HistoryList = (props: any) => {
-	const [matches, setMatches] = useState<any[]>([]);
+	const [games, setGames] = useState<any[]>([]);
 	const { state } = useContext(AppContext);
-	const [lastGames, setLastGames] = useState<any[]>([]);
+	// const [lastGames, setLastGames] = useState<any[]>([]);
 	const [lastScores, setLastScores] = useState<number[]>([]);
 	useEffect(() => {
 		fetchLastGames();
@@ -17,7 +18,7 @@ const HistoryList = (props: any) => {
 	}, []);
 
 	async function fetchLastGames() {
-		console.log("fetch matches ::->");
+		console.log("fetch games ::->");
 		try {
 			axios
 				.get(`${process.env.SERVER_HOST}/users/${props.id}/MatchesHistory`, {
@@ -26,13 +27,13 @@ const HistoryList = (props: any) => {
 				.then((res) => {
 					// setFriendsIds([...res.data].map((user)=>  user.id));
 					console.log("History matchs : ", res);
-					setMatches(res.data);
-					setLastGames(res.data.slice(-5));
-					console.log("last games sliced", lastGames);
+					setGames(res.data);
+					// setLastGames(res.data.slice(-5));
+					// console.log("last games sliced", lastGames);
 					///
-					let scores = Array(5).fill(0);
-					console.log("all matches : ", res.data);
-					[...lastGames]?.forEach((match) => {
+					let scores: number[] = [];
+					console.log("all games : ", res.data);
+					[...res.data.slice(-5)]?.forEach((match) => {
 						if (match) {
 							if (match.firstPlayer === props.id) {
 								scores.push(match.scoreFirst);
@@ -46,30 +47,31 @@ const HistoryList = (props: any) => {
 					///
 				});
 		} catch {
-			console.log("CANT GET ALL matches ");
+			console.log("CANT GET ALL games ");
 		}
 	}
-
+	console.log("sliced: ", lastScores)
 	return (
 		<div
 		className="profile-data"
 		style={{
-			flexDirection: "column",
-			justifyContent: "flex-start",
+			display: "flex",
+			flexDirection: "row",
+			justifyContent: "space-between",
+			alignItems: "flex-start",
 			gap: "20px",
 		}}
 		>
 			<WinStats {...state.mainUser}/>
-
-			<div className="friends-label" style={{ height: "65%" }}>
-				<div className="friends-label-header">
-					<h4>Match History</h4>
+			<div style={{minWidth: "46rem",}}>
+				<div >
+					<h4 style={{marginTop: '0'}}>Games History</h4>
 				</div>
-				<div className="list-of-friends">
-					{matches?.map((match) => {
+				<div style={{display: "flex", flexDirection: "column", gap: "2em"}}>
+					{games?.map((match) => {
 						//
 						return (
-							<HistoryCard match={{ ...match }} key={match.id} />
+							<HistoryGame game={{ ...match }} key={match.id} />
 						);
 					})}
 				</div>
