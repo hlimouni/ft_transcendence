@@ -1,4 +1,4 @@
-import React,{useContext} from 'react'
+import React,{useContext, useEffect} from 'react'
 import { AppContext } from '../../context/AppContext'
 import ProfileStyle from '../../styles/Profile.module.css'
 import Avatar from '@mui/material/Avatar'
@@ -6,9 +6,11 @@ import Button from '@mui/material/Button'
 import MenuBar from './menubar'
 import EditIcon from '@mui/icons-material/Edit';
 import EditDialog from './editDialog'
+import { fetchFriends, fetchMainUser } from './utils'
+
 
 const Cover = () => {
-  const {state} = useContext(AppContext);
+  // const {state} = useContext(AppContext);
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -18,6 +20,21 @@ const Cover = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const cntx = useContext(AppContext);
+  const {state} = cntx;
+  useEffect(() => {
+    fetchMainUser(cntx);
+    fetchFriends(cntx);
+		state.eventsSocket.on("UPDATE_DATA", () => {
+      fetchMainUser(cntx);
+			fetchFriends(cntx);
+		});
+	}, []);
+
+  // state.eventsSocket.on("UPDATE_DATA", () => {
+  //   fetchFriends(cntx); 
+  // });
 
   return (
     <div className={ProfileStyle.cover}>

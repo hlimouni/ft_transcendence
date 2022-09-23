@@ -15,7 +15,7 @@ const MenuBar = () => {
   }
   return (
     <>
-      <Tabs className={ProfileStyle.tabs} value={seletctedTab} onChange={handleChange} selectionFollowsFocus={true}>
+      <Tabs className={ProfileStyle.tabs} value={seletctedTab} onChange={handleChange}>
         <Tab sx={{letterSpacing: '.07em'}} label="Profile"/>
         <Tab sx={{letterSpacing: '.07em'}} label="Friends"/>
         <Tab sx={{letterSpacing: '.07em'}} label="History"/>

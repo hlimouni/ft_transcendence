@@ -40,7 +40,24 @@ export const options = {
   },
 };
 
-const labels = ['Game 1', 'Game 2', 'Game 3', 'Game 4', 'Game 5 (Last)'];
+const labels = ['Game 1', 'Game 2', 'Game 3', 'Game 4', 'Game 5'];
+
+const arr = [5, 3];
+const dataMap: any = {};
+
+arr.forEach((element, index) => {
+  dataMap[`Game ${index + 1}`] = element;
+});
+
+// 👇️️ {'key0': 'zero', 'key1': 'one', 'key2': 'two'}
+// console.log("object 3", obj3);
+
+// const labels = arr.map((value, index) => {
+//   return `Game ${index + 1}`;
+// });
+console.log("labels", labels);
+
+console.log("data map", dataMap);
 
 export const data = {
   labels,
@@ -49,7 +66,9 @@ export const data = {
       hoverBackgroundColor: 'rgba(108, 93, 211, .4)',
       hoverBorderColor: 'rgba(108, 93, 211, 1)',
       label: 'Score',
-      data: {'Game 1': 2, 'Game 2': 2, 'Game 3': 5, 'Game 4': 1, 'Game 5 (Last)': 5},
+      data: dataMap,
+
+      // data: {'Game 1': 2, 'Game 2': 2, 'Game 3': 5, 'Game 4': 1, 'Game 5 (Last)': 5},
       backgroundColor: 'rgba(76, 77, 84, .5)',
     },
   ],

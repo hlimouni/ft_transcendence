@@ -4,22 +4,15 @@ import {AppContext} from '../../context/AppContext'
 import Cover from './cover'
 import FriendsCard from './friendsCard'
 import MenuBar from './menubar'
-import { fetchFriends } from './utils'
+import { fetchFriends, fetchMainUser } from './utils'
 import ProfileStyle from '../../styles/Profile.module.css'
 import { WinStats } from './winStat'
 import { ScoreStats } from './scoreStat'
 import FriendsInfo from './friendsInof'
 
 export default function Profile() {
-  const {state} = useContext(AppContext);
-  const cntx = useContext(AppContext);
+  // const {state} = useContext(AppContext);
 
-	useEffect(() => {
-		console.log("state mainUser : effec ", state.mainUser);
-		if (state.mainUser) {
-			fetchFriends(cntx);
-		}
-	}, [state.mainUser]);
   return (
     <div className={ProfileStyle.profile}>
         <Cover/>
