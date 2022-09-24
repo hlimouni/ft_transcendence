@@ -1,23 +1,22 @@
 import { Inject, Logger, UseGuards } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { Socket } from 'socket.io';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { GameService } from './game.service';
+import User from 'src/users/entities/user.entity';
+import { config } from 'dotenv';
+import { JwtPayload } from 'src/chat/chat.gateway';
+import { UsersService } from 'src/users/users.service';
+import { Game } from './Data/game';
+import { gameState } from './Data/gameState';
+import { Player } from './Data/player';
 import {
-  OnGatewayConnection,
   OnGatewayDisconnect,
   OnGatewayInit,
   SubscribeMessage,
   WebSocketGateway,
   WebSocketServer,
 } from '@nestjs/websockets';
-import { Socket } from 'socket.io';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { UsersService } from 'src/users/users.service';
-import { Game } from './Classes/game';
-import { gameSate } from './Classes/gameState';
-import { Player } from './Classes/player';
-import { GameService } from './game.service';
-import User from 'src/users/entities/user.entity';
-import { config } from 'dotenv';
-import { JwtPayload } from 'src/chat/chat.gateway';
 
 config({ path: '../.env' });
 
@@ -29,18 +28,14 @@ config({ path: '../.env' });
   },
   namespace: 'game',
 })
-export class GameGateway
-  implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
+export class GameGateway implements OnGatewayInit, OnGatewayDisconnect
 {
   constructor(private readonly usersService: UsersService) {}
 
   private logger: Logger = new Logger('GameGateway');
-  //NOTE - Declare Objects Of Players
   private playerOne: Player;
   private playerTwo: Player;
-  //NOTE - Declare Array Of Game and every Game has two Players
   static game: Game[] = [];
-  //NOTE - Declare Array (Set) of Players (client.Id not repeat)
   private socketArr: Set<Socket> = new Set<Socket>();
   private userArr: any[] = [];
 
@@ -69,9 +64,6 @@ export class GameGateway
   }
   @UseGuards(JwtAuthGuard)
   handleConnection(client: Socket, ...args: any[]) {
-    /* 
-    if the user has watcher stat: emit "send_games" with GameGateway.game array to be rendered in the frontend
-     */
     if (!client.handshake.headers.cookie) {
       client.disconnect();
       return;
@@ -93,7 +85,7 @@ export class GameGateway
       );
     });
     if (gameFound) {
-      if (gameFound.gameStateFunc() === gameSate.PLAY) {
+      if (gameFound.gameStateGen() === gameState.PLAY) {
         gameFound.playerOutGame(client);
         gameFound.stopGame();
         GameGateway.game.splice(GameGateway.game.indexOf(gameFound), 1);
@@ -101,75 +93,17 @@ export class GameGateway
     }
   }
 
-  // @SubscribeMessage('resize')
-  // hundle_responsiveGame(client: Socket, payload: any) {
-  //   GameVariable._canvas_Width = payload.cWidth;
-  //   GameVariable._canvas_Height = payload.cHeight;
-  //   GameVariable._paddle_Height = GameVariable._canvas_Height / 6;
-  //   GameVariable._right_Paddle_X =
-  //     GameVariable._canvas_Width - GameVariable._paddle_Width;
-  // }
-
-  @SubscribeMessage('upPaddle')
-  hundle_up_paddle(client: Socket, payload: string) {
-    const gameFound = GameGateway.game.find((gm) => {
-      return (
-        gm.get_PlayerOne().getSocket() === client ||
-        gm.get_PlayerTwo().getSocket() === client
-      );
-    });
-    if (gameFound) {
-      const player: Player = gameFound.get_GamePlayer(client);
-      if (payload === 'down') {
-        player.getPaddle().up('down');
-      } else if (payload === 'up') {
-        player.getPaddle().up('up');
-      }
-    }
-  }
-
-  @SubscribeMessage('downPaddle')
-  hundle_down_paddle(client: Socket, payload: string) {
-    console.log('paddle down d zab');
-    const gameFound = GameGateway.game.find((gm) => {
-      return (
-        gm.get_PlayerOne().getSocket() === client ||
-        gm.get_PlayerTwo().getSocket() === client
-      );
-    });
-    console.log('game founds :', gameFound);
-    if (gameFound) {
-      const player = gameFound.get_GamePlayer(client);
-      if (payload === 'down') player.getPaddle().down('down');
-      else if (payload === 'up') player.getPaddle().down('up');
-    }
-  }
-
-  private sendGames(_server: any) {
-    const gameObj = { games: GameGateway.game.map((g) => g.getSubGame()) };
-    // console.log(gameObj);
-    _server.emit('receive_games', JSON.stringify(gameObj, null, 2));
-  }
-
   @SubscribeMessage('join_match')
   hundle_join_match(client: Socket, payload: any) {
     this.logger.log('Join Match ' + `${client.id} `);
     const user: any = payload.user;
-
     if (!payload.room_id) {
       console.log('user => ', payload.user);
-      //NOTE - Check If the same client not add in Set of socket
       if (this.socketArr.has(client)) {
         return;
       }
-
-      //NOTE - Add Client Socket In Set
       this.socketArr.add(client);
-
-      //NOTE - Add User In Array
       this.userArr.push({ ...user, avatar: user.image });
-
-      //NOTE - Check if Set Of Socket (i means player) to stock is 2
       const itSock = this.socketArr.values();
       const [first, second] = this.userArr;
 
@@ -198,7 +132,6 @@ export class GameGateway
           second.avatar,
         );
 
-        //NOTE - Create new instance of game and game is start in constructor
         const newGame = new Game(
           this.playerOne,
           this.playerTwo,
@@ -216,7 +149,6 @@ export class GameGateway
         this.userArr.splice(0, this.userArr.length);
       }
     } else {
-      //NOTE - Check If the same client not add in Set of socket
       if (this.privateGameUser.has(payload.room_id)) {
         [...this.privateGameUser.get(payload.room_id)]?.forEach((user) => {
           if (user.id == payload.user.id) {
@@ -281,7 +213,6 @@ export class GameGateway
           this.privateGameUser.get(payload.room_id)[1].image,
         );
 
-        //NOTE - Create new instance of game and game is start in constructor
         const newGame = new Game(
           this.playerOne,
           this.playerTwo,
@@ -299,15 +230,54 @@ export class GameGateway
     }
   }
 
+  @SubscribeMessage('up')
+  hundle_up_paddle(client: Socket, payload: string) {
+    const gameFound = GameGateway.game.find((gm) => {
+      return (
+        gm.get_PlayerOne().getSocket() === client ||
+        gm.get_PlayerTwo().getSocket() === client
+      );
+    });
+    if (gameFound) {
+      const player: Player = gameFound.get_GamePlayer(client);
+      if (payload === 'down') {
+        player.getPaddle().up('down');
+      } else if (payload === 'up') {
+        player.getPaddle().up('up');
+      }
+    }
+  }
+
+  @SubscribeMessage('down')
+  hundle_down_paddle(client: Socket, payload: string) {
+    const gameFound = GameGateway.game.find((gm) => {
+      return (
+        gm.get_PlayerOne().getSocket() === client ||
+        gm.get_PlayerTwo().getSocket() === client
+      );
+    });
+    console.log('game founds :', gameFound);
+    if (gameFound) {
+      const player = gameFound.get_GamePlayer(client);
+      if (payload === 'down') player.getPaddle().down('down');
+      else if (payload === 'up') player.getPaddle().down('up');
+    }
+  }
+
+  private sendGames(_server: any) {
+    const gameObj = { games: GameGateway.game.map((g) => g.getSubGame()) };
+    _server.emit('receive_games', JSON.stringify(gameObj, null, 2));
+  }
+
   @SubscribeMessage('send_games')
-  hundle_receiveGame(client: Socket, payload: any) {
+  handle_receiveGame(client: Socket, payload: any) {
     if (GameGateway.game.length !== 0) {
       const gameObj = { games: GameGateway.game.map((g) => g.getSubGame()) };
       client.emit('receive_games', JSON.stringify(gameObj, null, 2));
     }
   }
   @SubscribeMessage('watchers')
-  hundel_watchers(client: Socket, payload: any) {
+  handle_watchers(client: Socket, payload: any) {
     const gameFound = GameGateway.game.find((gm) => {
       return gm.getId() === payload.gameId;
     });
@@ -317,7 +287,6 @@ export class GameGateway
 
   @SubscribeMessage('STOP_GAME')
   stopGame(client: Socket) {
-    this.logger.log('Disconnected ' + `${client.id}`);
     const gameFound = GameGateway.game.find((gm) => {
       return (
         gm.get_PlayerOne().getSocket() === client ||
@@ -325,7 +294,7 @@ export class GameGateway
       );
     });
     if (gameFound) {
-      if (gameFound.gameStateFunc() === gameSate.PLAY) {
+      if (gameFound.gameStateGen() === gameState.PLAY) {
         gameFound.playerOutGame(client);
         gameFound.stopGame();
         GameGateway.game.splice(GameGateway.game.indexOf(gameFound), 1);
@@ -340,6 +309,7 @@ export class GameGateway
     const jwtPayload: JwtPayload = { ...decodedJwtAccessToken };
     return jwtPayload.id;
   }
+
   parseCookie(cookies: any) {
     if (cookies) {
       cookies = cookies.split('; ');

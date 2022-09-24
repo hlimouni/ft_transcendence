@@ -11,7 +11,8 @@ import Loading from '../components/Login/Loading'
 import MiniDrawer from '../components/Layout'
 
 const Home: NextPage = () => {
-  const [isLogin, setisLogin] = useState<boolean>(false);
+
+  const [isLoged, setIsLoged] = useState<boolean>(false);
   // const [CurrentUser, setCurrentUser] = useState();
   const { state, setMainUser } = useContext(AppContext);
   useEffect(() => {
@@ -19,26 +20,26 @@ const Home: NextPage = () => {
       .get(`${process.env.SERVER_HOST}/users/me`, { withCredentials: true })
       .then((res) => {
         console.log("hey", res.data);
-        setisLogin(true);
+        setIsLoged(true);
           setMainUser({ ...res.data });
       })
       .catch(() => {
         console.log("error", `${process.env.SERVER_HOST}/users/me`)
-        setisLogin(false);
+        setIsLoged(false);
 
       });
 
-  }, []);
+  }, [isLoged]);
   // useEffect(() => {
   //   if (state.mainUser)
-  //     setisLogin(true);
+  //     setIsLoged(true);
   // }, [state.mainUser]);
   // console.log("test", isLogin);
   return (
     <div className="div">
       
-      {!isLogin ? (
-        <Login />
+      {!isLoged ? (
+        <Login setIsLoged={setIsLoged}/>
       ) : (
         (!state.mainUser ? <Loading /> :
 
