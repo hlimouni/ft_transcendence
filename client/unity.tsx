@@ -1,6 +1,13 @@
 import { ThemeOptions } from '@mui/material'
 
 export const themeOptions: ThemeOptions = {
+  components: {
+    MuiButtonBase: {
+      defaultProps: {
+        disableRipple: true
+      },
+    },
+  },
   palette: {
     mode: 'dark',
     primary: {
