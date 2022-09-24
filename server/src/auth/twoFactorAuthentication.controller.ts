@@ -1,7 +1,10 @@
 import {
   Body,
   Controller,
+  ForbiddenException,
   Get,
+  HttpCode,
+  HttpStatus,
   Post,
   Req,
   Res,
@@ -73,7 +76,7 @@ export class TwoFactorAuthenticationController {
       );
 
     if (!isCodeValid) {
-      throw new UnauthorizedException('Wrong two factor authentication');
+      throw new ForbiddenException('Wrong two factor authentication');
     }
 
     await this.usersService.turnOnTwoFactorAuthentication(req.user.id);
