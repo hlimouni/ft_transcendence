@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import axios from 'axios';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -10,6 +11,7 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import ProfileStyle from '../../styles/Profile.module.css';
+import { AppContext } from '../../context/AppContext';
 
 ChartJS.register(
   CategoryScale,
@@ -20,7 +22,44 @@ ChartJS.register(
   Legend
 );
 
-export const options = {
+export function ScoreStats(props: any) {
+  const { state } = useContext(AppContext);
+  const [lastScores, setLastScores] = useState<number[]>([]);
+
+	useEffect(() => {
+		fetchLastGames();
+		state.eventsSocket.on("UPDATE_DATA", () => {
+			fetchLastGames();
+		});
+	}, []);
+
+	async function fetchLastGames() {
+		console.log("fetch games ::->");
+		try {
+			axios
+				.get(`${process.env.SERVER_HOST}/users/${props.id}/MatchesHistory`, {
+					withCredentials: true,
+				})
+				.then((res) => {
+					let scores: number[] = [];
+					[...res.data.slice(-5)]?.forEach((game) => {
+						if (game) {
+							if (game.firstPlayer === props.id) {
+								scores.push(game.scoreFirst);
+							} else if (game.secondPlayer === props.id) {
+								scores.push(game.scoreSecond);
+							}
+						}
+					});
+					setLastScores(scores);
+					console.log("last 5 scores", lastScores);
+				});
+		} catch {
+			console.log("CANT GET ALL games ");
+		}
+	}
+
+const options = {
   responsive: true,
   scales: {
     y: {
@@ -42,24 +81,14 @@ export const options = {
 
 const labels = ['Game 1', 'Game 2', 'Game 3', 'Game 4', 'Game 5'];
 
-const arr = [5, 3];
 const dataMap: any = {};
 
-arr.forEach((element, index) => {
+lastScores.forEach((element, index) => {
   dataMap[`Game ${index + 1}`] = element;
 });
 
-// 👇️️ {'key0': 'zero', 'key1': 'one', 'key2': 'two'}
-// console.log("object 3", obj3);
 
-// const labels = arr.map((value, index) => {
-//   return `Game ${index + 1}`;
-// });
-console.log("labels", labels);
-
-console.log("data map", dataMap);
-
-export const data = {
+const data = {
   labels,
   datasets: [
     {
@@ -67,13 +96,11 @@ export const data = {
       hoverBorderColor: 'rgba(108, 93, 211, 1)',
       label: 'Score',
       data: dataMap,
-
-      // data: {'Game 1': 2, 'Game 2': 2, 'Game 3': 5, 'Game 4': 1, 'Game 5 (Last)': 5},
       backgroundColor: 'rgba(76, 77, 84, .5)',
     },
   ],
 };
 
-export function ScoreStats(props: any) {
+
   return <div className={ProfileStyle.scores}><Bar options={options} data={data} /></div>;
 }
