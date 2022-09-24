@@ -18,6 +18,7 @@ import { Response } from 'express';
 import { UsersService } from 'src/users/users.service';
 import { JwtAuthService } from './jwt-auth.service';
 import { ApiTags } from '@nestjs/swagger';
+import { twoFaDto } from './dtos/2fa.dto';
 
 @ApiTags('Authentication')
 @Controller('2fa')
@@ -44,7 +45,7 @@ export class TwoFactorAuthenticationController {
   authenticate(
     @Req() req: RequestWithUser,
     @Res({ passthrough: true }) res,
-    @Body() body: { twoFactorAuthenticationCode: string },
+    @Body() body: twoFaDto,
   ) {
     const isCodeValid =
       this.twoFactorAuthService.isTwoFactorAuthenticationCodeValid(
@@ -67,11 +68,11 @@ export class TwoFactorAuthenticationController {
   async turnOnTwoFactorAuthentication(
     @Req() req: RequestWithUser,
     @Res({ passthrough: true }) res: Response,
-    @Body() { twoFactorAuthenticationCode },
+    @Body() body: twoFaDto,
   ) {
     const isCodeValid =
       this.twoFactorAuthService.isTwoFactorAuthenticationCodeValid(
-        twoFactorAuthenticationCode,
+        body.twoFactorAuthenticationCode,
         req.user,
       );
 
