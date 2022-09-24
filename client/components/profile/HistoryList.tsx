@@ -11,14 +11,13 @@ const HistoryList = (props: any) => {
 	// const [lastGames, setLastGames] = useState<any[]>([]);
 	const [lastScores, setLastScores] = useState<number[]>([]);
 	useEffect(() => {
-		fetchLastGames();
+		fetchAllGames();
 		state.eventsSocket.on("UPDATE_DATA", () => {
-			fetchLastGames();
+			fetchAllGames();
 		});
 	}, []);
 
-	async function fetchLastGames() {
-		console.log("fetch games ::->");
+	async function fetchAllGames() {
 		try {
 			axios
 				.get(`${process.env.SERVER_HOST}/users/${props.id}/MatchesHistory`, {
@@ -33,24 +32,22 @@ const HistoryList = (props: any) => {
 					///
 					let scores: number[] = [];
 					console.log("all games : ", res.data);
-					[...res.data.slice(-5)]?.forEach((match) => {
-						if (match) {
-							if (match.firstPlayer === props.id) {
-								scores.push(match.scoreFirst);
-							} else if (match.secondPlayer === props.id) {
-								scores.push(match.scoreSecond);
+					[...res.data.slice(-5)]?.forEach((game) => {
+						if (game) {
+							if (game.firstPlayer === props.id) {
+								scores.push(game.scoreFirst);
+							} else if (game.secondPlayer === props.id) {
+								scores.push(game.scoreSecond);
 							}
 						}
 					});
 					setLastScores(scores);
 					console.log("last 5 scores", lastScores);
-					///
 				});
 		} catch {
 			console.log("CANT GET ALL games ");
 		}
 	}
-	console.log("sliced: ", lastScores)
 	return (
 		<div
 		className="profile-data"
@@ -68,10 +65,10 @@ const HistoryList = (props: any) => {
 					<h4 style={{marginTop: '0'}}>Games History</h4>
 				</div>
 				<div style={{display: "flex", flexDirection: "column", gap: "2em"}}>
-					{games?.map((match) => {
+					{games?.map((game) => {
 						//
 						return (
-							<HistoryGame game={{ ...match }} key={match.id} />
+							<HistoryGame game={{ ...game }} key={game.id} />
 						);
 					})}
 				</div>
