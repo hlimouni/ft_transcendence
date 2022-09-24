@@ -127,7 +127,6 @@ a {
   /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
   /* grid-template-columns: 300px 300px 300px 300px; */
 /* hlimouni 
-  /* padding: 50px; */
   display: flex;
   gap: 40px;
   flex-direction: row;
