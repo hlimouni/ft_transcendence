@@ -1,10 +1,7 @@
 import * as React from 'react'
-import AppBar from '@mui/material/AppBar'
-import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 import Typography from '@mui/material/Typography'
 import Menu from '@mui/material/Menu'
-import Container from '@mui/material/Container'
 import Avatar from '@mui/material/Avatar'
 import MenuItem from '@mui/material/MenuItem'
 import { AppConsumer } from '../context/AppContext'
@@ -12,20 +9,9 @@ import Home from '../pages'
 import {
   Badge,
   List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
 } from '@mui/material'
-import SettingsIcon from '@mui/icons-material/Settings'
 import LogoutIcon from '@mui/icons-material/Logout'
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt'
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
-import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
-import TextsmsOutlinedIcon from '@mui/icons-material/TextsmsOutlined';
-import SportsEsportsOutlinedIcon from '@mui/icons-material/SportsEsportsOutlined';
-import GroupOutlinedIcon from '@mui/icons-material/GroupOutlined';
 import PlayCircleOutlinedIcon from '@mui/icons-material/PlayCircleOutlined';
 import { useEffect, useState } from 'react'
 import axios from 'axios'
@@ -34,34 +20,20 @@ import ButtonGroup from '@mui/material/ButtonGroup'
 import Button from '@mui/material/Button'
 import CancelIcon from '@mui/icons-material/Cancel'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle'
-import MessageIcon from '@mui/icons-material/Message'
-import MarkChatUnreadRoundedIcon from '@mui/icons-material/MarkChatUnreadRounded';
-import GroupIcon from '@mui/icons-material/Group'
-import PersonIcon from '@mui/icons-material/Person'
-import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
-import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import SportsEsportsIcon from '@mui/icons-material/SportsEsports'
-import PodcastsIcon from '@mui/icons-material/Podcasts'
-import OndemandVideoRoundedIcon from '@mui/icons-material/OndemandVideoRounded';
 import LayoutStyle from '../styles/Layout.module.css'
 import Link from 'next/link'
 import { acceptFriendRequest, unfriend } from '../utils/utils'
 import { useRouter } from 'next/router'
+import route from 'next/router'
 
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
-import HouseOutlinedIcon from '@mui/icons-material/HouseOutlined';
-import UserIcon from '../public/customer.png'
-import MainCard from './MainCard'
 
 
 const ProfileButton = ({ state }: { state: any }) => {
-  const settings = [
-    { text: 'Profile', icon: <PersonIcon /> },
-    { text: 'Edit Profile', icon: <SettingsIcon /> },
-    { text: 'Logout', icon: <LogoutIcon /> },
-  ]
 
+  const [logout, setLogout] = useState<boolean>(false)
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null,
   )
@@ -70,6 +42,22 @@ const ProfileButton = ({ state }: { state: any }) => {
   }
   const handleCloseUserMenu = () => {
     setAnchorElUser(null)
+  }
+
+  const handleLogout = () => {
+    axios
+      .get(`${process.env.SERVER_HOST}/users/logOut`, { withCredentials : true }).then(()=> {
+        state.eventsSocket.emit(
+          "YOU_LOG_OUT",
+          state.mainUser.id
+        );
+        console.log("logout");
+        setLogout(true)
+      }).catch((e) => {
+          console.log("wllah lakhrajt");
+      });
+      route.reload();
+
   }
   return (
     <>
@@ -88,38 +76,7 @@ const ProfileButton = ({ state }: { state: any }) => {
           src={state.mainUser.image}
         />
       </IconButton>
-      <Menu
-        sx={{ mt: '65px' }}
-        id="menu-appbar"
-        anchorEl={anchorElUser}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        keepMounted
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        open={Boolean(anchorElUser)}
-        onClose={handleCloseUserMenu}
-      >
-        {settings.map((setting) => (
-          <MenuItem
-            key={settings.indexOf(setting)}
-            // onClick={handleCloseUserMenu}
-            sx={{
-              display: 'flex',
-              justifyContent: 'flex-start',
-              alignContent: 'flex-start',
-              gap: '10px',
-            }}
-          >
-            {setting.icon}
-            <Typography>{setting.text}</Typography>
-          </MenuItem>
-        ))}
-      </Menu>
+      <IconButton onClick={handleLogout} style={{background:"none", border:"none", color:"white", fontSize:"38px", fontWeight:"bolder"}}><LogoutIcon /></IconButton>
     </>
   )
 }
@@ -411,7 +368,6 @@ const Layout = ({ children }: { children: any }) => {
                           <img src="/pong.png" alt="logo" height="30px" />
                     </div>
                     <div className={LayoutStyle.account_setting}>
-                      {/* */}
                       <List className={LayoutStyle.itemsUl}>
                         {sideMenu.map((page, index) => {
                           if (page.selected) {
@@ -419,7 +375,6 @@ const Layout = ({ children }: { children: any }) => {
                               
                               <Link href={page.path} key={index}>
                                 <a href="">
-                                      {/* <ListItemIcon sx={{color:'#6c5dd3'}} >{page.icon}</ListItemIcon> */}
                                       <BottomNavigation showLabels sx={{ backgroundColor: '#0c1827', color: '#ebebeb'}}>
                                         <BottomNavigationAction sx={{ backgroundColor: '#0c1827', color:'#6c5dd3', borderRadius:'50px' }} icon={page.icon} />
                                       </BottomNavigation>
@@ -433,7 +388,6 @@ const Layout = ({ children }: { children: any }) => {
                               
                               <Link href={page.path} key={index}>
                                 <a href="">
-                                      {/* <ListItemIcon>{page.icon}</ListItemIcon> */}
                                       <BottomNavigation showLabels sx={{ backgroundColor: '#0c1827', color: '#ebebeb'}}>
                                         <BottomNavigationAction sx={{width:'50px', backgroundColor: '#0c1827', color: '#ebebeb', borderRadius:'50px'}} icon={page.icon} />
                                       </BottomNavigation>
@@ -445,7 +399,6 @@ const Layout = ({ children }: { children: any }) => {
                         <FriendsRequestDropDown state={state} />
                         
                       </List>
-                      {/* */}
                     </div>
                     <div className={LayoutStyle.NotifMobile}>
                       <div className={LayoutStyle.NotifBtnMobile}>
@@ -459,7 +412,6 @@ const Layout = ({ children }: { children: any }) => {
                 
                 <div className={LayoutStyle.main_nav}>
 
-                  {/* */}
                   <nav style={{ color: '#8f8f8f' , padding: '0px 5px' }}>
                     <List className={LayoutStyle.itemsUlMobile}>
                       {sideMenu.map((page, index) => {
@@ -487,14 +439,8 @@ const Layout = ({ children }: { children: any }) => {
                       })}
                     </List>
                   </nav>
-                  {/* */}
 
                   
-                </div>
-                <div className={LayoutStyle.ProfileCard}>
-
-                <MainCard state={state} />
-
                 </div>
                 <div className={LayoutStyle.vl}></div>
                 

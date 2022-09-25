@@ -2,7 +2,7 @@
 
 .container {
     position: relative;
-    width: 80%;
+    width: 90%;
     height: 80vh;
     display: flex;
     justify-content: center;
@@ -154,7 +154,8 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding: 50px;
+    margin-top: 20px;
+    /* padding: 50px; */
 }
 
 .Title {
@@ -372,10 +373,10 @@
 }
 @media only screen and (max-width: 951px) {
    .container {
-    width: 70%;
+    width: 100%;
    }
    .gameHomeContainer {
-        padding: 50px;
+        /* padding: 50px; */
     }
    .gamePict {
     width: 100%;

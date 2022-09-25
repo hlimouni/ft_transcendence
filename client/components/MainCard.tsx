@@ -27,32 +27,6 @@ import LayoutStyle from '../styles/Layout.module.css'
 const MainCard = ({state} : {state: any}) => {
   return (
     <>
-    {/* <ul className={LayoutStyle.cardsL}>
-      <li>
-        <div className={LayoutStyle.cardL}>
-          <Image draggable="false" src={JamesWebb} className={LayoutStyle.card_imageL} />
-          <div className={LayoutStyle.card_ItemsL}>
-              <img className={LayoutStyle.card_PImgL} src={`${state.mainUser.image}`} />
-            <div className={LayoutStyle.card_headerL}>
-              <div className={LayoutStyle.card_header_textL}>
-                <h3 className={LayoutStyle.card_titleL}>{state.mainUser.userName}</h3>
-                  
-              </div>
-            </div>
-            <div className={LayoutStyle.card_btnsL} style={{ display: 'flex' }}>
-                <Button
-                    size="large"
-                    color="primary"
-                    variant="outlined"
-                >
-                    Profile
-                </Button>
-            </div>
-          </div>
-        </div>
-      </li>
-    </ul> */}
-
     <div className={LayoutStyle.cardsL}>
         <div className={LayoutStyle.cardL}>
           <Image draggable="false" src={PP} className={LayoutStyle.card_imageL} />
@@ -67,14 +41,6 @@ const MainCard = ({state} : {state: any}) => {
                   <p style={{color: 'white'}}>Friends</p>
               </div>
           </div>
-          {/* <div className={LayoutStyle.cardContent}>
-              <div>
-                  <p style={{color: 'white'}}>Friends</p>
-              </div>
-              <div>
-                  <p style={{color: 'white'}}>Friends</p>
-              </div>
-          </div> */}
           <div className={LayoutStyle.card_headerL}>
               <h3 className={LayoutStyle.card_titleL}>{state.mainUser.firstName + ' ' + state.mainUser.lastName}</h3>
               <p  className={LayoutStyle.card_User}>{'@' + state.mainUser.userName} </p>

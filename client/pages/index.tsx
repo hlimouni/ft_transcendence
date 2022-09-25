@@ -1,51 +1,44 @@
 import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
 import { useContext, useEffect, useState } from 'react'
 import axios from "axios"
 import Profile from '../components/profile/profile'
-import styles from '../styles/Home.module.css'
 import Login from './Login'
 import { AppContext } from '../context/AppContext'
 import Loading from '../components/Login/Loading'
-import MiniDrawer from '../components/Layout'
 
 const Home: NextPage = () => {
 
   const [isLoged, setIsLoged] = useState<boolean>(false);
-  // const [CurrentUser, setCurrentUser] = useState();
+  const [isloading, setIsloading] = useState<boolean>(true);
   const { state, setMainUser } = useContext(AppContext);
   useEffect(() => {
     axios
       .get(`${process.env.SERVER_HOST}/users/me`, { withCredentials: true })
       .then((res) => {
         console.log("hey", res.data);
-        setIsLoged(true);
           setMainUser({ ...res.data });
+          setIsLoged(true);
       })
       .catch(() => {
         console.log("error", `${process.env.SERVER_HOST}/users/me`)
         setIsLoged(false);
-
-      });
+      }).finally(()=> {
+        setIsloading(false);
+      }
+      );
 
   }, [isLoged]);
-  // useEffect(() => {
-  //   if (state.mainUser)
-  //     setIsLoged(true);
-  // }, [state.mainUser]);
-  // console.log("test", isLogin);
+  
   return (
     <div className="div">
       
-      {!isLoged ? (
-        <Login setIsLoged={setIsLoged}/>
-      ) : (
-        (!state.mainUser ? <Loading /> :
-
-          <Profile />
+      {isloading ? <Loading />  : (
+        !isLoged ? (
+            <Login setIsLoged={setIsLoged}/>
+          ) : (
+            state.mainUser && <Profile />
+          )
         )
-      )
       }
     </div>
   )

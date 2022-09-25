@@ -1,8 +1,6 @@
-import { User } from '../../utils/interfaces';
 import ProfileStyle from '../../styles/Profile.module.css'
 import Avatar from '@mui/material/Avatar'
 import { Chip, Typography } from '@mui/material';
-import { Box } from '@mui/system';
 
 const HistoryGame = ({ game }: {game: any}) => {
 
@@ -10,7 +8,6 @@ const HistoryGame = ({ game }: {game: any}) => {
     <div className={ProfileStyle.historyGame}>
         <div style={{display: 'flex'}}>
           <Chip sx={{width: '8em', margin: 'auto', paddingRight: '2em', zIndex: '7'}} variant='outlined' label={game.firstPlayerUserName}/>
-          {/* <Typography sx={{margin: 'auto'}} variant='subtitle1'>{game.firstPlayerUserName}</Typography> */}
           <Avatar sx={{zIndex: '50', width: '70px', height: '70px', margin: 'auto 0', marginLeft: '-30px' }} alt={game.firstPlayerUserName} src={game.firstPlayerImage}/>
           </div>
             <Typography sx={{margin: 'auto'}} variant='h3' color='primary'>{game.scoreFirst} : {game.scoreSecond}</Typography>

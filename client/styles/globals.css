@@ -38,13 +38,30 @@ a {
   position: absolute;
   top: -250px;
   bottom: 250px;
-  /* left: 0; */
-  /* right: 0; */
   margin: auto;
-  /* display: flex;
+}
+
+.checkcode {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
   align-items: center;
-  justify-content: center; */
-  /* flex-direction: column; */
+  flex-direction: column;
+  gap: 12px;
+}
+.checkcode * {
+  border-radius: 5px;
+  width: 500px;
+}
+
+.checkcode h1 {
+  text-align: center;
+  font-size: 42px;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .divForm {
@@ -66,12 +83,10 @@ a {
 }
 
 .Login form button:hover {
-  /* background-color: #335aac; */
   background-color: #6c5dd3;
 }
 
 .loadingDiv {
-  /* background-color: #0fcc45; */
   width: 100%;
   height: 100px;
   position: absolute;
@@ -86,19 +101,19 @@ a {
 /* ################################################## users cards ################################################## */
 
 .emptyusers {
+  position: relative;
   color: white;
+  font-size: large;
+  font-weight: bold;
   display: flex;
   justify-content: center;
 }
 
 .usersDiv {
-  background-color: #0c1827;
+  background-color: #132031;
   border-radius: 12px;
-  /* border: 2px solid #ffffff1c; */
-  box-shadow: -5px 2px 18px 4px #20272f;
   min-height: calc(50vh - 100px);
   margin: 0 auto;
-  /* margin-left: 50px; */
   margin-top: 20px;
   width: 92%;
   align-items: center;
@@ -107,11 +122,16 @@ a {
   
 }
 
-/* .usersDiv h1 {
-  color: white;
-  margin-left: 50px;
-  margin-bottom: 10px;
-} */
+.usersDivF {
+  background-color: #132031;
+  border-radius: 12px;
+  min-height: calc(50vh - 100px);
+  margin-top: 20px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0;
+}
 
 .usersvl {
   color: white;
@@ -119,33 +139,27 @@ a {
   margin-left: 30px;
   margin-top: 10px;
   width: 100px;
-  /* border-bottom: 2px solid #ffffff44; */
 }
 
 .condiv{
-  /* display: grid; */
-  /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
-  /* grid-template-columns: 300px 300px 300px 300px; */
-/* hlimouni 
   display: flex;
-  gap: 40px;
-  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
   flex-wrap: wrap;
-  margin-top: 0;
-*/
-  padding: 30px;
-  /* display: flex; */
-  display: grid;
-  /* grid-template-columns: repeat(8,minmax(0px,1fr)); */
-  grid-gap: 2rem;
-  /* border-radius: 20px; */
-  /* gap: 20px; */
-  /* flex-direction: row; */
-  /* flex-wrap: wrap; */
-  /* width: 500px; */
+  padding: 12px 28px;
+  gap: 12px;
 }
 
-@media (min-width: 900px) {
+.condivF {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 12px 28px;
+  gap: 12px;
+}
+
+/* @media (min-width: 768px) {
   .condiv{
     grid-template-columns: repeat(2,minmax(0px,1fr));
   }
@@ -155,83 +169,59 @@ a {
 
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1000px) {
   .condiv{
     grid-template-columns: repeat(3,minmax(0px,1fr));
-    /* display: grid; */
-    /* grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); */
-    /* grid-template-columns: 300px 300px 300px 300px; */
-    /* padding: 50px;
-    display: flex;
-    gap: 20px;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center; */
   }
 }
 
-@media (min-width: 1580px) {
+@media (min-width: 1220px) {
   .condiv{
     grid-template-columns: repeat(4,minmax(0px,1fr));
   }
 }
 
-@media (min-width: 2000px) {
+@media (min-width: 1480px) {
   .condiv{
-    grid-template-columns: repeat(5,minmax(0px,1fr));
+    grid-template-columns: repeat(5,minmax(250px,1fr));
   }
 }
 
-/* @media (min-width: 1810px) {
+@media (min-width: 1810px) {
   .condiv{
     grid-template-columns: repeat(6,minmax(0px,1fr));
   }
-} */
+}
 
-/* @media (min-width: 2110px) {
+@media (min-width: 2110px) {
   .condiv{
     grid-template-columns: repeat(7,minmax(0px,1fr));
   }
-} */
+}
 
 @media (min-width: 2400px) {
   .condiv{
-    grid-template-columns: repeat(6,minmax(0px,1fr));
+    grid-template-columns: repeat(8,minmax(0px,1fr));
   }
-}
-
-
+} */
 
 .cards {
   padding: 0px;
   display: flex;
   justify-content: center;
   list-style-type: none;
-
   border-radius: 20px;
-  /* hlimouni 
-   margin-top: 0; */
-
 }
 body {
   background-color: #1E2127;
-  /* min-width: 610px; */
 
   background-color: #0c1827;
-    /* height: 100px;
-    overflow:auto; */
-  /* height: 500px; */
-  /* background-color: black; */
-  /* background-image: url(../../files/pongbackg.jpeg); */
 }
 .card {
   position: relative;
-  /* display: block; */
   width: 250px;
   height: 220px;
   border-radius: 20px;
-  /* overflow: hidden; */
-  /* margin-bottom: 100px; */
   text-decoration: none;
   box-shadow: 0px 2px 20px 8px #040d18;
 }
@@ -242,7 +232,6 @@ body {
 
 .card_image {
   width: 100%;
-  /* height: auto; */
   border-radius: 20px;
 }
 
@@ -253,21 +242,11 @@ body {
   right: 0;
 
   background-color: #0c1827;
-  /* transform: translateY(100%);
-  transition: .2s ease-in-out; */
   border-radius: 20px;
-  /* hlimouni 
-    background-color: #242731;
-  transform: translateY(100%);
-  transition: .2s ease-in-out; */
 }
 
 h1, h2, h3, h4, h5, h6 {
   color: white;
-}
-
-.card:hover .card_Items {
-  /* transform: translateY(0); */
 }
 
 .card_header {
@@ -278,17 +257,6 @@ h1, h2, h3, h4, h5, h6 {
   padding: 1em;
 
   background-color: #0c1827;
-  /* border-radius: 20px; */
-  /* transform: translateY(-100%);
-  transition: .2s ease-in-out; */
-  /* hlimouni
-    background-color: #242731;
-  transform: translateY(-100%);
-  transition: .2s ease-in-out; */
-}
-
-.card:hover .card_header {
-  /* transform: translateY(0); */
 }
 
 .card_PImg {
@@ -315,8 +283,6 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
 
   background-color: #0c1827;
-  /* hlimouni
-  background-color: #242731; */
   overflow: hidden;
   border-radius: 20px;
 }
@@ -365,9 +331,6 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   color: orange;
   font-weight: bold;
-  /* align-items: center; */
-  /* gap: 5px; */
-  /* justify-content: center; */
   opacity: 0.5;
   animation: blink 1s linear infinite;
 }

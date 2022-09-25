@@ -1,14 +1,12 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../context/AppContext";
-import HistoryCard from "./HistoryCard";
 import HistoryGame from "./HistoryGame";
 import { WinStats } from "./winStat";
 
 const HistoryList = (props: any) => {
 	const [games, setGames] = useState<any[]>([]);
 	const { state } = useContext(AppContext);
-	// const [lastGames, setLastGames] = useState<any[]>([]);
 	const [lastScores, setLastScores] = useState<number[]>([]);
 	useEffect(() => {
 		fetchAllGames();
@@ -24,12 +22,8 @@ const HistoryList = (props: any) => {
 					withCredentials: true,
 				})
 				.then((res) => {
-					// setFriendsIds([...res.data].map((user)=>  user.id));
 					console.log("History matchs : ", res);
 					setGames(res.data);
-					// setLastGames(res.data.slice(-5));
-					// console.log("last games sliced", lastGames);
-					///
 					let scores: number[] = [];
 					console.log("all games : ", res.data);
 					[...res.data.slice(-5)]?.forEach((game) => {

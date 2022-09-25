@@ -34,10 +34,8 @@ export function WinStats(props: any) {
 					withCredentials: true,
 				})
 				.then((res) => {
-					// setFriendsIds([...res.data].map((user)=>  user.id));
 					console.log("matchs : ", res);
 					setMatches(res.data);
-					///
 					let winScore = 0;
 					let loseScore = 0;
 					console.log("all matches : ", res.data);
@@ -58,9 +56,6 @@ export function WinStats(props: any) {
 					});
 					setWins(winScore);
 					setLosses(loseScore);
-
-          // setWins(3);
-          // setLosses(2);
 				});
 		} catch {
 			console.log("CANT GET ALL matches ");

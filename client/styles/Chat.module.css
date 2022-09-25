@@ -42,10 +42,10 @@
 }
 .chatComponentStyle {
   /* overflow: hidden; */
-  background-color: #0c1827;
+  background-color: #132031;
   border-radius: 12px;
   /* border: 2px solid #ffffff1c; */
-  box-shadow: -5px 2px 18px 4px #20272f;
+  /* box-shadow: -5px 2px 18px 4px #20272f; */
   height: calc(85vh + 0px);
   margin: 0 auto;
   margin-top: 20px;

@@ -134,13 +134,11 @@ const Users = () => {
         <Loading />
       ) : (
         <div className='usersDiv'>
-          {/* <h1>
-            Users
-          </h1> */}
-          <div className="usersvl">Users</div>
           
             {state.users.length == 0 ?
-            (<div className='emptyusers'>no users found.</div>) : 
+            (<div className='emptyusers'>
+              <h2>No Users Found.</h2>
+            </div>) : 
             (
               <div className="condiv">
                 {state.users.map((user: any) => {

@@ -14,7 +14,6 @@ import ProfileStyle from '../../styles/Profile.module.css'
 import FileUploadRoundedIcon from '@mui/icons-material/FileUploadRounded';
 import { IconButton } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
-import { themeOptions } from '../../unity';
 import axios from 'axios';
 import TwoFaGenerate from './TwoFaGenerate';
 
@@ -99,41 +98,34 @@ export default function EditDialog(props: Props) {
       if (is2fa !== state.mainUser.isTwoFactorAuthenticationEnabled) {
         console.log("switch!!!")
         if (is2fa === true) {
-          // axios
-          // .post(
-          //   `${process.env.SERVER_HOST}/2fa/check2faCode`,
-          //   { twoFactorAuthenticationCode: props.code },
-          //   { withCredentials: true, }
-          // ).then((res) => {
-          //   isCodeCorrect = res.data;
-          //   console.log("checking code!", res.data);
-          // }).catch ((e) => {
-          //   console.log(e.response.data.message);
-          // });
-          // if (isCodeCorrect === false) {
-          //   //Alert wrong code
-          // } else {
             axios
               .post(
                   `${process.env.SERVER_HOST}/2fa/turnOn`,
                   { twoFactorAuthenticationCode: code },
                   { withCredentials: true, }
               ).then((res) => {
+                state.eventsSocket.emit(
+                  "I_UPDATE_MY_PROFILE",
+                  state.mainUser.id
+                );
                   isCodeCorrect = true;
-                  console.log("code send!", code)
+                  console.log("code send!", code);
               }).catch ((e) => {
                 isCodeCorrect = false;
                 alert("wrong code");
                 console.log(e.response.data.message);
               })
-          // }
         } else {
           console.log("turned offhhh")
           axios
           .post(
-              `${process.env.SERVER_HOST}/2fa/turnOff`,
+              `${process.env.SERVER_HOST}/2fa/turnOff`, {},
               { withCredentials: true, }
           ).then((res) => {
+            state.eventsSocket.emit(
+              "I_UPDATE_MY_PROFILE",
+              state.mainUser.id
+            );
               console.log("turned off")
           }).catch ((e) => {
             console.log("turned off error!!")
@@ -174,7 +166,6 @@ export default function EditDialog(props: Props) {
             );
           });
       }
-      // state.eventsSocket.emit("I_UPDATE_MY_PROFILE", state.mainUser.id);
       { isCodeCorrect && handleClose() }
     };
 
@@ -219,9 +210,6 @@ export default function EditDialog(props: Props) {
                       }
                     }} />
                 </Button>
-                {/* <Button sx={{padding: '1em 1.8em'}} variant='contained'>
-                    Upload Photo
-                </Button> */}
             </DialogActions>
 
         </DialogContent>

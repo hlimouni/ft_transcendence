@@ -10,7 +10,6 @@ const Friend = (props: Props) => {
 
   return (
     <div className={ProfileStyle.oneFriend}>
-          {/* <img src={props.user.image} alt="User avatar"/> */}
           <Avatar sx={{ width: '70px', height: '70px', margin: 'auto 0' }} alt={props.user.userName} src={props.user.image}/>
           <Typography sx={{margin: 'auto'}} variant='subtitle1'>{props.user.userName}</Typography>
           <Box display='flex' sx={{p: '0 1rem'}} className='friend-state'> {

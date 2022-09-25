@@ -4,39 +4,29 @@ import React, { useContext, useState, useEffect } from 'react'
 import Button from '@mui/material/Button';
 import axios from "axios";
 
+const TwoFa = `${process.env.SERVER_HOST}/2fa/generate`;
+
 export default function TwoFaGenerate(props: any) {
-    // const [Code, setCode] = useState<any>();
-    const TwoFa = `${process.env.SERVER_HOST}/2fa/generate`;
+   const [twofaImage, setTwofaImage ] = useState<any>(null);
 
-    // function CheckCode() {
-    //     // try {
-    //         axios
-    //             .post(
-    //                 `${process.env.SERVER_HOST}/2fa/turnOn`,
-    //                 { twoFactorAuthenticationCode: Code },
-    //                 { withCredentials: true, }
-    //             ).then((res) => {
 
-    //                 console.log("code send!", Code)
-    //             }).catch ((e) => {
-    //                 alert("wrong code");
-    //                 console.log(e.response.data.message);
-    //             })
-    //     // } catch (error) {
-
-    //     //     console.log("error")
-    //     // }
-    // }
-
+   useEffect(() => {
+     axios.get(TwoFa, { withCredentials : true}).then(({data}) => {
+       setTwofaImage(data)
+     })
+   }, [])
+    
     return (
         <div className="TwoFa">
-            <Image
+            { twofaImage ? <Image
                 loader={() => TwoFa}
                 src={TwoFa}
                 layout='fixed'
                 width={150}
                 height={150}
               />
+              : <p>stafzok</p>
+            }
 
             <TextField
                 id="outlined-basic"
@@ -45,12 +35,6 @@ export default function TwoFaGenerate(props: any) {
                 sx={{width:'150px', margin:'10px'}}
                 onChange={(e) => props.setCode(e.target.value)}
               />
-              {/* <Button
-                variant="contained"
-                onClick={CheckCode}
-              >
-                Active
-            </Button> */}
         </div>
     )
 }

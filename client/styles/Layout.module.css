@@ -16,8 +16,8 @@
     display: block;
     display: flex;
     justify-content: space-between;
-    border-radius: 12px;
-    box-shadow: -5px 2px 18px 4px #20272f;
+    /* border-radius: 12px; */
+    /* box-shadow: -5px 2px 18px 4px #20272f; */
     /* display: grid; */
 }
 .account_setting
@@ -106,8 +106,8 @@
         width: 100px;
         display: inline-block;
         font-size: 20px;
-        border-radius: 12px;
-        box-shadow: -5px 2px 18px 4px #20272f;
+        /* border-radius: 12px;
+        box-shadow: -5px 2px 18px 4px #20272f; */
         /* display: none; */
         /* overflow: hidden; */
         /* transition: 0.5s; */

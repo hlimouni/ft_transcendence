@@ -4,8 +4,6 @@ import Loading from '../../components/Login/Loading'
 import UserCard from '../../components/Users/UserCard'
 import { AppContext } from '../../context/AppContext'
 import { User } from '../../utils/interfaces'
-import { Container } from '@mui/material'
-import { TIMEOUT } from 'dns'
 
 const Friends = () => {
   const { state, setUsers, setMainUser, setFriends } = useContext(AppContext)
@@ -91,7 +89,6 @@ const Friends = () => {
     }
   }
 
-  // fetchpendingIds();
   async function fetchpendingRequests() {
     try {
       const res = await axios.get(
@@ -123,26 +120,19 @@ const Friends = () => {
       
     }
   }
-  // useEffect(()=>{
-  //     fetchpendingIds();
-  // },[pendingIds])
-
   return (
     <>
-    {/* <Container style={{ color: 'white', padding: '0px' }}> */}
       {!state.friends ? (
         <Loading />
       ) : (
-        <div className='usersDiv'>
-          {/* <h1>
-            Users
-          </h1> */}
-          <div className="usersvl">Friends</div>
+        <div className='usersDivF'>
           
             {state.friends.length == 0 ?
-            (<div className='emptyusers'>no Friends found.</div>) : 
+            (<div className='emptyusers'>
+              <h2>No Friends Found.</h2>
+            </div>) : 
             (
-              <div className="condiv">
+              <div className="condivF">
                 {state.friends.map((user: any) => {
                   return (
                     <UserCard key={user.id} {...user} pendingRequestsIds={pendingRequestsIds} friendsId={friendsId} blockedUsersIds={blockedUsersIds} RecievedRequests={RecievedRequests} />
@@ -152,7 +142,6 @@ const Friends = () => {
             )}
         </div>
       )}
-    {/* </Container> */}
     </>
   )
 }

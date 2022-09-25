@@ -60,7 +60,8 @@ const Login = (props: any) => {
             </div>
           </div>
         ):(
-          <div>
+          <div className="checkcode">
+            <h1>Verification code</h1>
             <TextField
                 id="outlined-basic"
                 label="Code"

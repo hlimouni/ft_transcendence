@@ -4,7 +4,6 @@ import Loading from '../../components/Login/Loading'
 import UserCard from '../../components/Users/UserCard'
 import { AppContext } from '../../context/AppContext'
 import { User } from '../../utils/interfaces'
-import { Container } from '@mui/material'
 
 const FriendsInfo = () => {
   const { state, setUsers, setMainUser, setFriends } = useContext(AppContext)
@@ -84,20 +83,12 @@ const FriendsInfo = () => {
       }
     } catch (error) {}
   }
-  // useEffect(()=>{
-  //     fetchpendingIds();
-  // },[pendingIds])
-
   return (
     <>
-    {/* <Container style={{ color: 'white', padding: '0px' }}> */}
       {!state.friends ? (
         <Loading />
       ) : (
         <div >
-          {/* <h1 style={{ color: 'white', paddingLeft: '10px', textDecoration: 'underline' }}>
-            Friends
-          </h1> */}
           <div className="condiv">
             {state.friends.map((user: any) => {
               return (
@@ -107,7 +98,6 @@ const FriendsInfo = () => {
           </div>
         </div>
       )}
-    {/* </Container> */}
     </>
   )
 }
