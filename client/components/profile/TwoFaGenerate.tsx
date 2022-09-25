@@ -4,23 +4,29 @@ import React, { useContext, useState, useEffect } from 'react'
 import Button from '@mui/material/Button';
 import axios from "axios";
 
-export default function TwoFaGenerate() {
-    const [Code, setCode] = useState<any>();
+export default function TwoFaGenerate(props: any) {
+    // const [Code, setCode] = useState<any>();
     const TwoFa = `${process.env.SERVER_HOST}/2fa/generate`;
 
-    function CheckCode() {
-        try {
-            axios
-                .post(
-                    `${process.env.SERVER_HOST}/2fa/turnOn`,
-                    { twoFactorAuthenticationCode: Code },
-                    { withCredentials: true, }
-                )
-            console.log("code send!", Code)
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    // function CheckCode() {
+    //     // try {
+    //         axios
+    //             .post(
+    //                 `${process.env.SERVER_HOST}/2fa/turnOn`,
+    //                 { twoFactorAuthenticationCode: Code },
+    //                 { withCredentials: true, }
+    //             ).then((res) => {
+
+    //                 console.log("code send!", Code)
+    //             }).catch ((e) => {
+    //                 alert("wrong code");
+    //                 console.log(e.response.data.message);
+    //             })
+    //     // } catch (error) {
+
+    //     //     console.log("error")
+    //     // }
+    // }
 
     return (
         <div className="TwoFa">
@@ -37,14 +43,14 @@ export default function TwoFaGenerate() {
                 label="Code"
                 variant="outlined"
                 sx={{width:'150px', margin:'10px'}}
-                onChange={(e) => setCode(e.target.value)}
+                onChange={(e) => props.setCode(e.target.value)}
               />
-              <Button
+              {/* <Button
                 variant="contained"
                 onClick={CheckCode}
               >
                 Active
-            </Button>
+            </Button> */}
         </div>
     )
 }

@@ -16,6 +16,7 @@ import { IconButton } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 import { themeOptions } from '../../unity';
 import axios from 'axios';
+import TwoFaGenerate from './TwoFaGenerate';
 
 const IOSSwitch = styled((props: SwitchProps) => (
     <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -77,18 +78,72 @@ export default function EditDialog(props: Props) {
     const handleClose = props.closeHandler;
     const open = props.openState;
     const { state } = useContext(AppContext);
+    const [code, setCode] = useState<any>();
     const [userName, setUserName] = useState(state.mainUser.userName);
     const [userImage, setUserImage] = useState(state.mainUser.image);
     const [modalImage, setModalImage] = useState(state.mainUser.image);
+    const [is2fa, setIs2fa] = useState(state.mainUser.isTwoFactorAuthenticationEnabled);
+
+
+    const handleSwitch = () => {
+      setIs2fa(!is2fa);
+    };
 
     useEffect(() => {
       setModalImage(state.mainUser.image);
     }, []);
     const handleSubmit = () => {
+      console.log("validation code: ", code);
+      let isCodeCorrect = true;
+      console.log("switch!!!",is2fa,"twofac:",state.mainUser.isTwoFactorAuthenticationEnabled);
+      if (is2fa !== state.mainUser.isTwoFactorAuthenticationEnabled) {
+        console.log("switch!!!")
+        if (is2fa === true) {
+          // axios
+          // .post(
+          //   `${process.env.SERVER_HOST}/2fa/check2faCode`,
+          //   { twoFactorAuthenticationCode: props.code },
+          //   { withCredentials: true, }
+          // ).then((res) => {
+          //   isCodeCorrect = res.data;
+          //   console.log("checking code!", res.data);
+          // }).catch ((e) => {
+          //   console.log(e.response.data.message);
+          // });
+          // if (isCodeCorrect === false) {
+          //   //Alert wrong code
+          // } else {
+            axios
+              .post(
+                  `${process.env.SERVER_HOST}/2fa/turnOn`,
+                  { twoFactorAuthenticationCode: code },
+                  { withCredentials: true, }
+              ).then((res) => {
+                  isCodeCorrect = true;
+                  console.log("code send!", code)
+              }).catch ((e) => {
+                isCodeCorrect = false;
+                alert("wrong code");
+                console.log(e.response.data.message);
+              })
+          // }
+        } else {
+          console.log("turned offhhh")
+          axios
+          .post(
+              `${process.env.SERVER_HOST}/2fa/turnOff`,
+              { withCredentials: true, }
+          ).then((res) => {
+              console.log("turned off")
+          }).catch ((e) => {
+            console.log("turned off error!!")
+              console.log(e.response.data.message);
+          })     
+        }
+      }
       if (userImage !== state.mainUser.image) {
         const formData = new FormData();
   
-        //   Update the formData object
         formData.append("file", userImage);
         axios
           .post(`${process.env.SERVER_HOST}/users/updateAvatar`, formData, {
@@ -120,7 +175,7 @@ export default function EditDialog(props: Props) {
           });
       }
       // state.eventsSocket.emit("I_UPDATE_MY_PROFILE", state.mainUser.id);
-      handleClose();
+      { isCodeCorrect && handleClose() }
     };
 
 
@@ -188,7 +243,8 @@ export default function EditDialog(props: Props) {
           <DialogContentText sx={{fontSize: '.8em', paddingBottom: '1rem'}}>
               Two Factor Authentication
           </DialogContentText>
-          <IOSSwitch/>
+          <IOSSwitch checked={is2fa} onChange={handleSwitch}/>
+          {is2fa && !state.mainUser.isTwoFactorAuthenticationEnabled && <TwoFaGenerate setCode={setCode}/>}
         </DialogContent>
         <DialogActions sx={{padding: '1em'}}>
             <Button variant='contained' sx={{padding: '1em 1.8em'}} onClick={handleSubmit}>Apply Settings</Button>
