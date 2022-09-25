@@ -115,7 +115,6 @@ export class UsersController {
     @Req() req: RequestWithUser,
     @Body() relatedUser: RelatedUserDto,
   ) {
-    console.log("block body : ", relatedUser);
     if (req.user.id === relatedUser.id)
       throw new HttpException(
         'Forbidden, Can not send request',

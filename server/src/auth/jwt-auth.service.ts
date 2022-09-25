@@ -1,15 +1,13 @@
 import { JwtService } from '@nestjs/jwt';
 import { Injectable } from '@nestjs/common';
-
-type Jwt2FAPayload = { id: string; isSecondFactorAuthenticated: boolean };
-// type JwtPayload = { id: string; username: string };
+import { JwtPayload } from './dtos/jwt-payLoad.dto';
 
 @Injectable()
 export class JwtAuthService {
   constructor(private readonly jwtService: JwtService) {}
 
   signWith2FA(user, isAuthenticated = false) {
-    const payload: Jwt2FAPayload = {
+    const payload: JwtPayload = {
       id: user.id,
       isSecondFactorAuthenticated: isAuthenticated,
     };
