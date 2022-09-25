@@ -86,6 +86,7 @@
     border-radius: 1.5rem;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     /* position: absolute; */
     /* transform: translate(0, -10rem); */
     background-color: #132031;
@@ -102,6 +103,7 @@
     margin: 2.2rem;
     margin-right: 0;
     padding: 2em 3em;
+    height: 50px;
 }
 
 

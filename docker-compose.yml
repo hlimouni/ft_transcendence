@@ -23,11 +23,11 @@ services:
       PGADMIN_DEFAULT_EMAIL: ilias@1337.com
       PGADMIN_DEFAULT_PASSWORD: 1337
 
-  # pingpong-app:
-  #   build: ./
-  #   container_name: pingpong
-  #   ports:
-  #     - 5000:5000
-  #     - 3000:3000
-  #   links:
-  #     - db
+  pingpong-app:
+    build: ./
+    container_name: pingpong
+    ports:
+      - 5000:5000
+      - 3000:3000
+    links:
+      - db

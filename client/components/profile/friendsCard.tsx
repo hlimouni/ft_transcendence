@@ -1,4 +1,4 @@
-import React, { Key, useContext } from 'react'
+import React, { useContext } from 'react'
 import { AppContext } from '../../context/AppContext'
 import { User } from '../../utils/interfaces';
 import Friend from './friend';
@@ -8,7 +8,8 @@ const FriendsCard = () => {
     const {state} = useContext(AppContext);
   return (
         <div className={ProfileStyle.friends}>
-          {[...state.friends].map((user: User) => <Friend user={user}/>)}
+          <h1>hello</h1>
+          {/* {[...state.friends].map((user: User) => <Friend user={user}/>)} */}
         </div>
   )
 }

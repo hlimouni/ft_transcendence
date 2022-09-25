@@ -54,18 +54,6 @@ export default function Reciever({
 						<h3>{`${state.receiver.firstName} ${state.receiver.lastName}`}</h3>
 						<p>@{state.receiver.userName}</p>
 					</div>
-					<div>
-						<Button
-							variant="outlined"
-							color="primary"
-							size="large"
-							onClick={gameHandleInvite}
-							startIcon={<SportsEsportsTwoToneIcon />}
-						disabled={state.receiver.isPlaying}
-						>
-							invite
-						</Button>
-					</div>
 				</div>
 			) : (
 				<>

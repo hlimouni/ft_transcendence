@@ -21,11 +21,6 @@ export default function Chat() {
 	const [windowWidth, setWindowWidth] = useState<any>(null);
 	const [showContacts, setShowContacts] = useState(windowWidth === 1000);
 
-	useEffect(() => {
-		setWindowWidth(window.innerWidth);
-		fetchMainUser();
-	}, []);
-
 	async function fetchMainUser() {
 		axios
 			.get(`${process.env.SERVER_HOST}/users/me`, {
@@ -40,6 +35,11 @@ export default function Chat() {
 				Router.push("/");
 			});
 	}
+	useEffect(() => {
+		setWindowWidth(window.innerWidth);
+		fetchMainUser();
+	}, []);
+
 
 	useEffect(() => {
 		console.log("state mainUser : effec ", state.mainUser);

@@ -57,7 +57,6 @@ const ProfileButton = ({ state }: { state: any }) => {
           console.log("wllah lakhrajt");
       });
       route.reload();
-
   }
   return (
     <>
