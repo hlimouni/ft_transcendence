@@ -42,31 +42,6 @@ export function HomeGame() {
 		setIsGame(true);
 	};
 
-	useEffect(() => {
-		if (router.query && router.query.roomId) {
-			gameInviteDefHandler(router.query.roomId[0]);
-		}
-	}, [router]);
-
-	const gameInviteDefHandler = async (room_id: string) => {
-		// user join match
-		socket.emit("join_match", {
-			user: state.mainUser,
-			room_id: room_id,
-		});
-
-		// listening to playing event, for receiving updates about game
-		socket.on("Playing", (payload: any) => {
-			if (payload.playing) {
-				data.set_userOne(payload.first);
-				data.set_userTwo(payload.second);
-				data.set_State(1);
-			}
-			setCurrentState(1);
-		});
-		setIsGame(true);
-	};
-
 	const gameContainer = useRef(null);
 
 	useEffect(() => {
